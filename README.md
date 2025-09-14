@@ -1,6 +1,6 @@
-* nodejs >= 18.16.0
-* npm = v9.8.1
-* yarn = v1.22.19
+* nodejs = 18.16.0
+* npm = v9.5.1
+* yarn = Yarn Berry v4.9.3
 
 * "express": "^4.18.2"
 * "nodemon": "^3.0.1"
