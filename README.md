@@ -1,4 +1,4 @@
-* nodejs >= 18.16.0
+* nodejs = 18.16.0
 * npm = v9.5.1
 * yarn = berry 4.9.3
 
