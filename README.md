@@ -1,16 +1,16 @@
-* nodejs = 18.16.0
+* nodejs >= 18.16.0
 * npm = v9.5.1
-* yarn = Yarn Berry v4.9.3
+* yarn = berry 4.9.3
 
-* "express": "^4.18.2"
-* "nodemon": "^3.0.1"
-* "eslint": "^8.47.0"
+* "react": "^18.2.0"
+* "react-dom": "^18.2.0"
+* "@types/react": "^18.0.28"
+* "@types/react-dom": "^18.0.11"
 
-* "@babel/runtime": "^7.22.10"
-* "@babel/cli": "^7.22.10"
-* "@babel/core": "^7.22.10"
-* "@babel/eslint-parser": "^7.22.10"
-* "@babel/node": "^7.22.10"
-* "@babel/plugin-transform-runtime": "^7.22.10"
-* "@babel/preset-env": "^7.22.10"
-* "babel-plugin-module-resolver": "^5.0.0"
+* "vite": "^4.3.2"
+* "@vitejs/plugin-react-swc": "^3.0.0"
+
+* "eslint": "^8.38.0"
+* "eslint-plugin-react": "^7.32.2"
+* "eslint-plugin-react-hooks": "^4.6.0"
+* "eslint-plugin-react-refresh": "^0.3.4"
