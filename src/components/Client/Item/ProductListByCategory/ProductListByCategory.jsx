@@ -4,6 +4,12 @@ import { ChevronRight } from '@mui/icons-material';
 import ProductCard from './ProductCard/ProductCard';
 
 const ProductListByCategory = ({ categoryName, products, showViewAll = true, categoryColor = '#ff5722' }) => {
+  
+  // Kiểm tra nếu không có sản phẩm thì không render
+  if (!products || products.length === 0) {
+    return null;
+  }
+
   return (
     <Box sx={{ 
         mb: { xs: 4, sm: 6, md: 8 },
@@ -49,7 +55,7 @@ const ProductListByCategory = ({ categoryName, products, showViewAll = true, cat
                 mt: 0.5,
               }}
             >
-              Khám phá các sản phẩm {categoryName.toLowerCase()} chất lượng nhất
+              {products.length} sản phẩm {categoryName.toLowerCase()} chất lượng
             </Typography>
           </Box>
         </Box>
@@ -93,7 +99,7 @@ const ProductListByCategory = ({ categoryName, products, showViewAll = true, cat
           }
         }}
       >
-        {products.slice(0, 6).map((product, idx) => (
+        {products.slice(0, 6).map((product) => (
           <Grid 
             item 
             key={product.id}
@@ -111,31 +117,33 @@ const ProductListByCategory = ({ categoryName, products, showViewAll = true, cat
         ))}
       </Grid>
 
-      {/* Navigation dots */}
-      <Box sx={{ 
-        display: 'flex', 
-        justifyContent: 'center', 
-        gap: 1, 
-        mt: { xs: 2, sm: 3 } 
-      }}>
-        {[1, 2, 3].map((dot) => (
-          <Box
-            key={dot}
-            sx={{
-              width: 8,
-              height: 8,
-              borderRadius: '50%',
-              backgroundColor: dot === 1 ? categoryColor : '#e2e8f0',
-              transition: 'all 0.3s ease',
-              cursor: 'pointer',
-              '&:hover': {
-                backgroundColor: dot === 1 ? categoryColor : '#cbd5e0',
-                transform: 'scale(1.2)',
-              },
-            }}
-          />
-        ))}
-      </Box>
+      {/* Navigation dots - Chỉ hiển thị nếu có nhiều hơn 6 sản phẩm */}
+      {products.length > 6 && (
+        <Box sx={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          gap: 1, 
+          mt: { xs: 2, sm: 3 } 
+        }}>
+          {[1, 2, 3].map((dot) => (
+            <Box
+              key={dot}
+              sx={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                backgroundColor: dot === 1 ? categoryColor : '#e2e8f0',
+                transition: 'all 0.3s ease',
+                cursor: 'pointer',
+                '&:hover': {
+                  backgroundColor: dot === 1 ? categoryColor : '#cbd5e0',
+                  transform: 'scale(1.2)',
+                },
+              }}
+            />
+          ))}
+        </Box>
+      )}
     </Box>
   );
 };

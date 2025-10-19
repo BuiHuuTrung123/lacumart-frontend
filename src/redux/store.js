@@ -2,6 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import { activeBoardReducer } from './activeBoard/activeBoardSlice'
 import { userReducer } from './user/userSlice'
 import { activeCardReducer } from './activeCard/activeCardSlice'
+import { productReducer } from './product/productSlice'
 //Store = cái kho lớn
 //Reducer = nhân viên phụ trách từng kệ trong kho   
 //State = dữ liệu đang nằm trên từng kệ đó
@@ -28,7 +29,8 @@ const reducers = combineReducers({
     // activeBoardReducer chính là cái function reducer bạn export từ createSlice.
     activeBoard: activeBoardReducer,
     user: userReducer,
-    activeCard: activeCardReducer
+    activeCard: activeCardReducer,
+    product: productReducer
 })
 const persistedReducer = persistReducer(rootPersistConfig, reducers)
 export const store = configureStore({

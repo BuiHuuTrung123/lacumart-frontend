@@ -1,48 +1,82 @@
 import React from 'react';
 import { Box, Typography, useTheme, useMediaQuery } from '@mui/material';
 import ProductListByCategory from './ProductListByCategory/ProductListByCategory';
-import whey from '~/assets/Category/whey.jpg';
-import bcaa from '~/assets/Category/bcaa.jpg';
-import suatangcan from '~/assets/Category/suatangcan.jpg';
-import tangsucmanh from '~/assets/Category/tangsucmanh.jpg';
-import dauca from '~/assets/Category/dauca.jpg';
-import tangcan from '~/assets/Category/tangcan.png';
-import vitamin from '~/assets/Category/vitamin.jpg';
-import dungcu from '~/assets/Category/dungcu.webp';
+
+// Import Redux
+import { useDispatch, useSelector } from 'react-redux';
+import { selectAllProducts, fetchAllProductsAPI } from '~/redux/product/productSlice';
 
 const categories = [
-    { name: 'Whey Protein', image: whey, color: '#ff5722' },
-    { name: 'Sữa Tăng Cân', image: suatangcan, color: '#42a5f5' },
-    { name: 'BCAA Amino Acids', image: bcaa, color: '#66bb6a' },
-    { name: 'Tăng Sức Mạnh', image: tangsucmanh, color: '#ffa726' },
-    { name: 'Hỗ Trợ Giảm Cân', image: dauca, color: '#ab47bc' },
-    { name: 'MuscleTech Alpha', image: tangcan, color: '#26c6da' },
-    { name: 'Vitamin Khoáng Chất', image: vitamin, color: '#ec407a' },
-    { name: 'Phụ Kiện Tập Gym', image: dungcu, color: '#78909c' },
+    { name: 'Whey Protein', color: '#ff5722' },
+    { name: 'Sữa tăng cân', color: '#42a5f5' }, // ← ĐỔI THÀNH "Sữa tăng cân" (chữ thường)
+    { name: 'BCAA Amino Acids', color: '#66bb6a' },
+    { name: 'Tăng Sức Mạnh', color: '#ffa726' },
+    { name: 'Hỗ Trợ Giảm Cân', color: '#ab47bc' },
+    { name: 'MuscleTech Alpha', color: '#26c6da' },
+    { name: 'Vitamin Khoáng Chất', color: '#ec407a' },
+    { name: 'Phụ Kiện Tập Gym', color: '#78909c' },
 ];
 
 const CategorySection = () => {
     const theme = useTheme();
     const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
-    const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+    const dispatch = useDispatch();
+    
+    // Lấy dữ liệu từ Redux
+    const products = useSelector(selectAllProducts);
+    const loading = useSelector(state => state.product.loading);
+    const error = useSelector(state => state.product.error);
 
-    // Dummy products với dữ liệu đa dạng hơn
-    const generateDummyProducts = (categoryIndex) => {
-        return Array.from({ length: 8 }).map((_, i) => ({
-            id: `${categoryIndex}-${i}`,
-            name: `${categories[categoryIndex].name} ${i + 1}`,
-            image: categories[categoryIndex].image,
-            price: `₫${((i + 1) * 350000).toLocaleString()}`,
-            originalPrice: i % 3 === 0 ? `₫${((i + 1) * 450000).toLocaleString()}` : null,
-            discount: i % 3 === 0 ? '20' : null,
-            rating: 4.5 - (i * 0.1),
-            reviewCount: 124 + (i * 25),
-            sold: `${1.2 + (i * 0.3)}k`,
-            isBestSeller: i === 0,
-            tag: i === 1 ? 'NEW' : i === 2 ? 'SALE' : null,
-            desc: 'Cung cấp dinh dưỡng chất lượng cao giúp phục hồi và phát triển cơ bắp tối ưu cho người tập luyện.'
-        }));
+    console.log('📦 All products from Redux:', products);
+
+    // Gọi API khi component mount
+    React.useEffect(() => {
+        dispatch(fetchAllProductsAPI());
+    }, [dispatch]);
+
+    // Hàm lọc sản phẩm theo category
+    const getProductsByCategory = (categoryName) => {
+        if (!products || !Array.isArray(products)) return [];
+        
+        return products.filter(product => 
+            product.mainCategory === categoryName
+        ).slice(0, 8); // Giới hạn 8 sản phẩm mỗi danh mục
     };
+
+    // Format dữ liệu cho ProductCard
+    const formatProductForCard = (product) => {
+        return {
+            id: product._id,
+            name: product.name,
+            image: product.images?.[0]?.url || '/images/default-product.jpg',
+            price: `₫${product.price?.current?.toLocaleString() || '0'}`,
+            originalPrice: product.price?.discount > 0 ? 
+                `₫${product.price?.original?.toLocaleString() || '0'}` : null,
+            discount: product.price?.discount > 0 ? product.price.discount.toString() : null,
+            rating: 4.5, // Có thể lấy từ API nếu có
+            reviewCount: 124, // Có thể lấy từ API nếu có
+            sold: `${Math.floor(Math.random() * 10) + 1}.${Math.floor(Math.random() * 9)}k`, // Tạm thời random
+            isBestSeller: Math.random() > 0.7, // Tạm thời random
+            tag: product._destroy ? 'SALE' : null,
+            desc: product.description || product.shortDescription || 'Sản phẩm chất lượng cao'
+        };
+    };
+
+    if (loading) {
+        return (
+            <Box sx={{ textAlign: 'center', py: 4 }}>
+                <Typography>Đang tải sản phẩm...</Typography>
+            </Box>
+        );
+    }
+
+    if (error) {
+        return (
+            <Box sx={{ textAlign: 'center', py: 4 }}>
+                <Typography color="error">Lỗi khi tải sản phẩm: {error}</Typography>
+            </Box>
+        );
+    }
 
     return (
         <Box sx={{
@@ -69,15 +103,22 @@ const CategorySection = () => {
                 Sản Phẩm Nổi Bật
             </Typography>
 
-            {categories.map((cat, index) => (
-                <ProductListByCategory
-                    key={cat.name}
-                    categoryName={cat.name}
-                    categoryColor={cat.color}
-                    products={generateDummyProducts(index)}
-                    showViewAll={true}
-                />
-            ))}
+            {categories.map((category, index) => {
+                const categoryProducts = getProductsByCategory(category.name);
+                
+                // Chỉ hiển thị category có sản phẩm
+                if (categoryProducts.length === 0) return null;
+
+                return (
+                    <ProductListByCategory
+                        key={category.name}
+                        categoryName={category.name}
+                        categoryColor={category.color}
+                        products={categoryProducts.map(formatProductForCard)}
+                        showViewAll={true}
+                    />
+                );
+            })}
         </Box>
     );
 };
