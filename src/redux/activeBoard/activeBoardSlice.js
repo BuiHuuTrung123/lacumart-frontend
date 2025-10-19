@@ -67,16 +67,7 @@ export const activeBoardSlice = createSlice({
                 column.cards = column.cards.filter(i => i._id !== incomingMoveCard._id)
             }
         },
-        // restoreCardToBoard: (state, action) => {
-        //     //update nested data
-        //     const incomingMoveCard = action.payload
-        //     //Tìm dần từ board -> column -> card
-        //     const column = state.currentActiveBoard.columns.find(i => i._id === incomingMoveCard.columnId)
-        //     if (column) {
-        //         column.cards.push(incomingMoveCard)
-        //     }
-        // }
-
+       
     },
     //extraReducers nơi xử lý dữ liệu bất đồng bộ 
     extraReducers: (builder) => {
@@ -122,17 +113,11 @@ export const activeBoardSlice = createSlice({
 
 })
 
-// actions: là nơi dành cho các components bên dưới gọi bằng dispatch() tới nó để cập nhật lại dữ liệu thông qua reducer (chạy đồng bộ)
-// để ý ở trên thì k thấy properties actions đâu cả, bởi vì những cái actions này đơn giản là được thằng redux tạo tự động theo tên của reducer
+
 export const { updateCurrentActiveBoard, updateCardInBoard, moveCardInBoard } = activeBoardSlice.actions
-//Selector: Là nơi dành cho các components bên dưới gọi bằng hooke useSelector() để lấy dữ liệu từ trong kho redux store ra sử dụng 
+
 export const selectCurrentActiveBoard = (state) => {
     return state.activeBoard.currentActiveBoard
 }
-// cái file này tên là activeBoardSlice nhưng chúng ta cần export 1 thứ tên là Reducer  
-// export default activeBoardSlice.reducer
-//reducer
-// Đó chính là hàm reducer tổng hợp của slice
-// Nó biết cách lắng nghe tất cả các action mà bạn khai báo trong reducers.
-// Khi bạn import và đưa vào store, Redux sẽ dùng hàm này để quản lý state của slice.
+
 export const activeBoardReducer = activeBoardSlice.reducer
