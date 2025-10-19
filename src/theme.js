@@ -1,91 +1,108 @@
-
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles';
-const APP_BAR_HEIGHT = '58px'
-const BOARD_BAR_HEIGHT = '60px'
-const BOARD_CONTENT_HEIGHT = `calc(100vh - ${APP_BAR_HEIGHT} - ${BOARD_BAR_HEIGHT})`
-const COLUMN_HEADER_HEIGHT = '50px'
-const COLUMN_FOOTER_HEIGHT = '56px'
+
+// Kích thước responsive
+const HEADER_HEIGHT = { xs: '60px', sm: '70px', md: '80px' };
+const SUPPLEMENT_NAVBAR_HEIGHT = '48px';
+const BANNER_HEIGHT = { xs: '300px', sm: '400px', md: '500px', lg: '600px', xl: '700px' };
+const CATEGORY_HEIGHT = { xs: 'auto', md: '400px', lg: '500px' };
+const FOOTER_HEIGHT = { xs: 'auto', md: '56px' };
+
 // Create a theme instance.
-
 const theme = extendTheme({
-    palette: {
-        mode: 'light', // hoặc 'dark'
+  palette: {
+    mode: 'light',
+    primary: {
+      main: '#ff5722',
+      light: '#ff8a65',
+      dark: '#d84315',
     },
-    trelloCustom: {
-        appBarHeight: APP_BAR_HEIGHT,
-        boardBarHeight: BOARD_BAR_HEIGHT,
-        boardContentHeight: BOARD_CONTENT_HEIGHT,
-        columnHeaderHeight: COLUMN_HEADER_HEIGHT,
-        columnFooterHeight: COLUMN_FOOTER_HEIGHT
+    secondary: {
+      main: '#1a237e',
+      light: '#534bae',
+      dark: '#000051',
     },
+    background: {
+      default: '#f8fafc',
+      paper: '#ffffff',
+    },
+  },
+  
+  trelloCustom: {
+    headerHeight: HEADER_HEIGHT,
+    supplementNavbarHeight: SUPPLEMENT_NAVBAR_HEIGHT,
+    bannerHeight: BANNER_HEIGHT,
+    categoryHeight: CATEGORY_HEIGHT,
+    footerHeight: FOOTER_HEIGHT
+  },
 
-    components: {
+  // Thêm breakpoints tùy chỉnh
+  breakpoints: {
+    values: {
+      xs: 0,
+      sm: 600,
+      md: 900,
+      lg: 1200,
+      xl: 1536,
+    },
+  },
 
-        MuiCssBaseline: {
-            styleOverrides: {
-                "html, body, & *": {
-                    overscrollBehavior: 'none',
-                    "*::-webkit-scrollbar": {
-                        width: "8px",
-                        height: "8px",
-                    },
-                    "*::-webkit-scrollbar-thumb": {
-                        backgroundColor: '#dcdde1',
-                        borderRadius: "8px",
-                    },
-                    "*::-webkit-scrollbar-thumb:hover": {
-                        backgroundColor: "white",
-                    },
-                },
-            },
+  components: {
+    MuiCssBaseline: {
+      styleOverrides: {
+        "html, body, & *": {
+          overscrollBehavior: 'none',
+          boxSizing: 'border-box',
+          "*::-webkit-scrollbar": {
+            width: { xs: "4px", sm: "6px", md: "8px" },
+            height: { xs: "4px", sm: "6px", md: "8px" },
+          },
+          "*::-webkit-scrollbar-thumb": {
+            backgroundColor: '#dcdde1',
+            borderRadius: "8px",
+          },
+          "*::-webkit-scrollbar-thumb:hover": {
+            backgroundColor: "#bfbfbf",
+          },
         },
-        MuiInputLabel: {
-            styleOverrides: {
-                root: {
-                    fonSize: '2.875rem',
-                }
-            }
+        html: {
+          fontSize: { xs: '14px', sm: '15px', md: '16px' },
         },
-        MuiTypography: {
-            styleOverrides: {
-                // Name of the slot
-                root: {
-
-                    // color: theme.palette.primary.main,
-                    '&.MuiTypography-body1': { fontSize: '0.875rem' }
-
-                }
-            }
+        body: {
+          margin: 0,
+          padding: 0,
+          minHeight: '100vh',
         },
-        MuiButton: {
-            styleOverrides: {
-                root: {
-                    // Some CSS
-                    textTransform: 'none',
-                    borderWidth: '0.5px',
-                    '&:hover': { borderWidth: '2px', }
-                }
-            }
-        },
-        MuiOutlinedInput: {
-            styleOverrides: {
-                root: {
-                    fonSize: '0.875rem',
-
-                    '& fieldset': {
-                        borderWidth: '0.5px !important'
-                    },
-                    '&:hover fieldset': {
-                        borderWidth: '2px !important'
-                    },
-                    '&.Mui-focused fieldset': {
-                        borderWidth: '2px !important'
-                    }
-
-                }
-            }
+      },
+    },
+    
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          textTransform: 'none',
+          borderWidth: '0.5px',
+          borderRadius: '8px',
+          fontSize: { xs: '0.8rem', sm: '0.85rem', md: '0.9rem' },
+          padding: { xs: '6px 12px', sm: '8px 16px', md: '10px 20px' },
+          '&:hover': { 
+            borderWidth: '2px',
+            transform: 'translateY(-1px)',
+            boxShadow: '0 4px 12px rgba(0,0,0,0.15)',
+          },
+          transition: 'all 0.2s ease-in-out',
         }
+      },
+    },
+    
+    MuiPopover: {
+      styleOverrides: {
+        paper: {
+          boxShadow: '0 10px 40px rgba(0,0,0,0.15)',
+          borderRadius: '0 0 12px 12px',
+          borderTop: '3px solid #ff5722'
+        }
+      }
     }
-})
+  }
+});
 
 export default theme;
