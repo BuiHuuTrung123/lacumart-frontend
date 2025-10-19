@@ -4,6 +4,7 @@ import Auth from '~/pages/Auth/Auth'
 import AccoutVerification from '~/pages/Auth/AccoutVerifycation'
 import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '~/redux/user/userSlice'
+import Home from '~/pages/Home'
 const ProtectedRoute = ({ user }) => {
   if (!user) return <Navigate to='/login' replace={true} />
   return <Outlet />
@@ -17,7 +18,7 @@ function App() {
 
 
       <Route element={<ProtectedRoute user={currentUser} />} >
-        <Route path='/' element={<Auth />} />
+        <Route path='/' element={<Home />} />
       </Route>
       {/* Authentication */}
       <Route path='/login' element={<Auth />} />

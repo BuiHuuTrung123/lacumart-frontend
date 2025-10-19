@@ -9,6 +9,9 @@ export default defineConfig({
     alias: [
       { find: '~', replacement: '/src' }
     ]
-  }
+  },
+    optimizeDeps: {
+    include: ['@mui/material/Tooltip', '@emotion/styled', '@mui/material/Unstable_Grid2'],
+  },
   // base: './'
 })
