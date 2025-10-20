@@ -21,7 +21,7 @@ import {
   TrendingUp,
   Storage,
 } from '@mui/icons-material';
-import logo from '../../assets/logo.png';
+import logo from '~/assets/logo.png';
 
 const menuItems = [
   { id: 'dashboard', label: 'Tổng quan', icon: DashboardIcon },
