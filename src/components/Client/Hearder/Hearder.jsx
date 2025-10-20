@@ -9,7 +9,7 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Link } from 'react-router-dom'
-import logo from '~/assets/logo.png'
+// import logo from '~/assets/logo.png'
 import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '~/redux/user/userSlice'
 import Profiles from './Menus/Profiles'
@@ -57,7 +57,7 @@ function Header() {
         {/* Logo */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <img
+            {/* <img
               src={logo}
               alt="Logo"
               style={{
@@ -65,7 +65,7 @@ function Header() {
                 width: '40px',
                 objectFit: 'contain'
               }}
-            />
+            /> */}
             <Typography
               variant="span"
               sx={{
