@@ -34,7 +34,8 @@ import {
   selectAllProducts, 
   fetchAllProductsAPI,
   selectProductLoading,
-  selectProductError 
+  selectProductError,
+  deleteProductApi 
 } from '~/redux/product/productSlice';
 
 const ProductManagement = () => {
@@ -43,7 +44,6 @@ const ProductManagement = () => {
   const loading = useSelector(selectProductLoading)
   const error = useSelector(selectProductError)
   
-  console.log('📦 Redux products:', products) // Kiểm tra dữ liệu
 
   const [openDialog, setOpenDialog] = useState(false);
   const [selectedProduct, setSelectedProduct] = useState(null);
@@ -65,13 +65,13 @@ const ProductManagement = () => {
 
   const handleDeleteProduct = (productId) => {
     // TODO: Gọi API xóa sản phẩm
-    console.log('Delete product:', productId)
+   dispatch(deleteProductApi(productId))
     setDeleteConfirm(null);
   };
 
   const handleSaveProduct = (productData) => {
     // TODO: Gọi API thêm/sửa sản phẩm
-    console.log('Save product:', productData)
+
     setOpenDialog(false);
   };
 
@@ -168,7 +168,7 @@ const ProductManagement = () => {
                   <TableCell>
                     <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
                       <Avatar
-                        src={product.images?.[0]?.url}
+                        src={product.images}
                         variant="rounded"
                         sx={{ width: 50, height: 50 }}
                       >

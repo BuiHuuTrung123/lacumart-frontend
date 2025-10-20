@@ -8,7 +8,7 @@ import { toast } from 'react-toastify'
 //
 
 // Product
-export const createNewProductdAPI = async (data) => {
+export const createNewProductdAPI1 = async (data) => {
   const response = await authorizeAxiosInstance.post(`${API_ROOT}/v1/products`, data)
   toast.success('Product created successfully')
   return response.data

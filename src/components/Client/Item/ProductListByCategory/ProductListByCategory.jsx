@@ -110,6 +110,7 @@ const ProductListByCategory = ({ categoryName, products, showViewAll = true, cat
             sx={{
               display: 'flex',
               justifyContent: 'center',
+               
             }}
           >
             <ProductCard product={product} />

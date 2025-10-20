@@ -7,7 +7,7 @@ import { selectCurrentUser } from '~/redux/user/userSlice'
 import Home from '~/pages/Home'
 import AdminDashboard from '~/pages/Admin/Dashboard'
 const ProtectedRoute = ({ user }) => {
-  if (!user) return <Navigate to='/login' replace={true} />
+  if (!user) return <Navigate to='/Home' replace={true} />
   return <Outlet />
 }
 function App() {
@@ -19,9 +19,11 @@ function App() {
 
 
       <Route element={<ProtectedRoute user={currentUser} />} >
+        {currentUser?.role === 'client' && <Route path='/' element={<Home />} />}
         <Route path='/' element={<AdminDashboard />} />
       </Route>
       {/* Authentication */}
+      <Route path='/Home' element={<Home />} />
       <Route path='/login' element={<Auth />} />
       <Route path='/register' element={<Auth />} />
       <Route path='/account/verification' element={<AccoutVerification />} />

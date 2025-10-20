@@ -12,7 +12,7 @@ const categories = [
     { name: 'BCAA Amino Acids', color: '#66bb6a' },
     { name: 'Tăng Sức Mạnh', color: '#ffa726' },
     { name: 'Hỗ Trợ Giảm Cân', color: '#ab47bc' },
-    { name: 'MuscleTech Alpha', color: '#26c6da' },
+    { name: 'Dầu cá', color: '#26c6da' },
     { name: 'Vitamin Khoáng Chất', color: '#ec407a' },
     { name: 'Phụ Kiện Tập Gym', color: '#78909c' },
 ];
@@ -27,7 +27,6 @@ const CategorySection = () => {
     const loading = useSelector(state => state.product.loading);
     const error = useSelector(state => state.product.error);
 
-    console.log('📦 All products from Redux:', products);
 
     // Gọi API khi component mount
     React.useEffect(() => {
@@ -48,7 +47,7 @@ const CategorySection = () => {
         return {
             id: product._id,
             name: product.name,
-            image: product.images?.[0]?.url || '/images/default-product.jpg',
+            images: product.images || '/images/default-product.jpg',
             price: `₫${product.price?.current?.toLocaleString() || '0'}`,
             originalPrice: product.price?.discount > 0 ? 
                 `₫${product.price?.original?.toLocaleString() || '0'}` : null,

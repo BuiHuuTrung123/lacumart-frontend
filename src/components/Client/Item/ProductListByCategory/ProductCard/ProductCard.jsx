@@ -3,6 +3,14 @@ import { Card, CardMedia, CardContent, Typography, Box, Button, Chip, Rating, Ic
 import { ShoppingCart, Favorite, FlashOn } from '@mui/icons-material';
 
 const ProductCard = ({ product }) => {
+    console.log('Product data:', product);
+  console.log('Images value:', product.images);
+  console.log('Images type:', typeof product.images);
+  // Chỉ hiển thị sản phẩm còn hàng hoặc sắp hết
+  if (product.stockStatus === 'out_of_stock') {
+    return null;
+  }
+
   return (
     <Card
       sx={{
@@ -14,18 +22,18 @@ const ProductCard = ({ product }) => {
           xl: 220
         },
         maxWidth: '100%',
-        borderRadius: { xs: 2, sm: 3 },
-        overflow: 'visible',
+        borderRadius: { xs: 3, sm: 5 },
+       overflow: 'hidden',
         backgroundColor: '#fff',
-        boxShadow: '0 2px 12px rgba(0,0,0,0.08)',
+         boxShadow: '0 2px 12px rgba(0,0,0,0.08), 0 0 0 1px #f0f0f0',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         position: 'relative',
         cursor: 'pointer',
         border: '1px solid #f0f0f0',
         '&:hover': {
-          boxShadow: '0 12px 32px rgba(255, 87, 34, 0.15)',
+          boxShadow: '0 12px 32px rgba(255, 87, 34, 0.15), 0 0 0 1px #ff5722',
           transform: { xs: 'translateY(-4px)', sm: 'translateY(-6px)' },
-          border: '1px solid #ff5722',
+          // border: '1px solid #ff5722',
         },
         '&:hover .product-actions': {
           opacity: 1,
@@ -63,14 +71,15 @@ const ProductCard = ({ product }) => {
             }}
           />
         )}
-        {product.tag && (
+        {/* Hiển thị badge sắp hết hàng */}
+        {product.stockStatus === 'low_stock' && (
           <Chip
-            label={product.tag}
+            label="SẮP HẾT"
             size="small"
             sx={{
-              backgroundColor: product.tag === 'NEW' ? '#1976d2' : '#4caf50',
+              backgroundColor: '#ff9800',
               color: 'white',
-              fontWeight: 600,
+              fontWeight: 700,
               fontSize: { xs: '8px', sm: '10px' },
               height: { xs: 16, sm: 20 },
               '& .MuiChip-label': { 
@@ -118,11 +127,11 @@ const ProductCard = ({ product }) => {
           position: 'relative',
           overflow: 'hidden',
           height: { 
-            xs: 120, 
-            sm: 140, 
-            md: 160, 
-            lg: 180,
-            xl: 200
+            xs: 150, 
+            sm: 180, 
+            md: 200, 
+            lg: 250,
+            xl: 300
           },
           backgroundColor: '#f8fafc',
           p: { xs: 1, sm: 1.5, md: 2 }
@@ -130,13 +139,13 @@ const ProductCard = ({ product }) => {
       >
         <CardMedia
           component="img"
-          image={product.image}
+          image={product.images}
           alt={product.name}
           className="product-image"
           sx={{
             width: '100%',
             height: '100%',
-            objectFit: 'contain',
+            objectFit: 'cover',
             transition: 'transform 0.5s ease',
           }}
         />
@@ -246,71 +255,17 @@ const ProductCard = ({ product }) => {
           </Typography>
         </Box>
 
-        {/* Giá và Khuyến mãi */}
+        {/* Giá bán */}
         <Box sx={{ mt: 0.5 }}>
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 0.5, mb: 0.5, flexWrap: 'wrap' }}>
-            <Typography
-              sx={{
-                fontSize: { xs: '12px', sm: '14px', md: '16px' },
-                fontWeight: 800,
-                color: '#ff5722',
-                lineHeight: 1,
-              }}
-            >
-              {product.price || '890.000₫'}
-            </Typography>
-            {product.originalPrice && (
-              <Typography
-                sx={{
-                  color: '#a0aec0',
-                  textDecoration: 'line-through',
-                  fontSize: { xs: '10px', sm: '12px' },
-                  lineHeight: 1,
-                }}
-              >
-                {product.originalPrice}
-              </Typography>
-            )}
-          </Box>
-
-          {product.discount && (
-            <Chip
-              label={`-${product.discount}%`}
-              size="small"
-              sx={{
-                backgroundColor: '#4caf50',
-                color: 'white',
-                fontWeight: 700,
-                fontSize: { xs: '9px', sm: '11px' },
-                height: { xs: 16, sm: 20 },
-                '& .MuiChip-label': {
-                  px: 0.5,
-                  fontSize: { xs: '9px', sm: '11px' }
-                },
-              }}
-            />
-          )}
-        </Box>
-
-        {/* Thông tin bổ sung */}
-        <Box sx={{ 
-          display: 'flex', 
-          alignItems: 'center', 
-          justifyContent: 'space-between', 
-          mt: 0.5 
-        }}>
-          <Typography sx={{ 
-            color: '#4caf50', 
-            fontSize: { xs: '9px', sm: '11px' }, 
-            fontWeight: 600 
-          }}>
-            ✅ Còn hàng
-          </Typography>
-          <Typography sx={{ 
-            color: '#666', 
-            fontSize: { xs: '9px', sm: '11px' } 
-          }}>
-            Đã bán: {product.sold || '1.2k'}
+          <Typography
+            sx={{
+              fontSize: { xs: '12px', sm: '14px', md: '16px' },
+              fontWeight: 800,
+              color: '#ff5722',
+              lineHeight: 1,
+            }}
+          >
+            {product.price || '890.000₫'}
           </Typography>
         </Box>
       </CardContent>

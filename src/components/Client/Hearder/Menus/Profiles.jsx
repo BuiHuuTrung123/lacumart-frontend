@@ -49,7 +49,7 @@ function Profiles() {
   return (
     <Box>
 
-      <Tooltip title="Account settings">
+      <Tooltip title="Tài khoản cá nhân">
         <IconButton
           onClick={handleClick}
           size="small"

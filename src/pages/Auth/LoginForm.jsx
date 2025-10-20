@@ -4,6 +4,8 @@ import Box from '@mui/material/Box'
 import Button from '@mui/material/Button'
 import Avatar from '@mui/material/Avatar'
 import LockIcon from '@mui/icons-material/Lock'
+import HomeIcon from '@mui/icons-material/Home'
+import FitnessCenterIcon from '@mui/icons-material/FitnessCenter'
 import Typography from '@mui/material/Typography'
 import { Card as MuiCard } from '@mui/material'
 import { ReactComponent as TrelloIcon } from '~/assets/trello.svg'
@@ -40,12 +42,15 @@ function LoginForm() {
 
     toast.promise(
       dispatch(loginUserAPI({ email, password })),
-      { pending: 'Logging in...' }
+      { pending: 'Đang đăng nhập...' }
     ).then(res => {
       // Kiểm tra ko có lỗi thì điều hướng
       if (!res.error) navigate(`/`)
     })
+  }
 
+  const handleGoHome = () => {
+    navigate('/')
   }
 
   return (
@@ -56,7 +61,6 @@ function LoginForm() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'flex-start',
-        background: `linear-gradient(135deg, ${theme.palette.primary.light}15, ${theme.palette.secondary.light}15)`,
         py: { xs: 4, sm: 6, md: 8 },
         px: 2
       }}
@@ -68,13 +72,41 @@ function LoginForm() {
               width: '100%',
               maxWidth: { xs: 350, sm: 400, md: 420 },
               borderRadius: 3,
-              boxShadow: theme.shadows[8],
+              boxShadow: '0 20px 40px rgba(255, 87, 34, 0.2)',
               overflow: 'visible',
-              border: `1px solid ${theme.palette.divider}`
+              border: `2px solid #ff5722`,
+              background: 'white',
+              position: 'relative'
             }}
           >
             {/* Header Section */}
-            <Box sx={{ p: 3, textAlign: 'center' }}>
+            <Box sx={{ p: 3, textAlign: 'center', position: 'relative' }}>
+              {/* Home Button */}
+              <Button
+                startIcon={<HomeIcon />}
+                onClick={handleGoHome}
+                sx={{
+                  position: 'absolute',
+                  top: 16,
+                  left: 16,
+                  color: '#ff5722',
+                  fontWeight: 600,
+                  textTransform: 'none',
+                  borderRadius: 2,
+                  px: 2,
+                  py: 1,
+                  border: '1px solid #ff5722',
+                  '&:hover': {
+                    backgroundColor: '#fff5f5',
+                    transform: 'translateY(-2px)',
+                    boxShadow: '0 4px 12px rgba(255, 87, 34, 0.2)'
+                  },
+                  transition: 'all 0.3s ease'
+                }}
+              >
+                Trang chủ
+              </Button>
+
               <Box sx={{
                 display: 'flex',
                 justifyContent: 'center',
@@ -84,23 +116,23 @@ function LoginForm() {
               }}>
                 <Avatar
                   sx={{
-                    bgcolor: 'primary.main',
+                    bgcolor: '#ff5722',
                     width: 50,
                     height: 50,
-                    boxShadow: theme.shadows[2]
+                    boxShadow: '0 4px 12px rgba(255, 87, 34, 0.4)'
                   }}
                 >
-                  <LockIcon />
+                  <FitnessCenterIcon />
                 </Avatar>
                 <Avatar
                   sx={{
-                    bgcolor: 'primary.main',
+                    bgcolor: '#ff5722',
                     width: 50,
                     height: 50,
-                    boxShadow: theme.shadows[2]
+                    boxShadow: '0 4px 12px rgba(255, 87, 34, 0.4)'
                   }}
                 >
-                  <TrelloIcon />
+                  <LockIcon />
                 </Avatar>
               </Box>
 
@@ -109,24 +141,26 @@ function LoginForm() {
                 component="h1"
                 gutterBottom
                 sx={{
-                  fontWeight: 700,
-                  background: `linear-gradient(45deg, ${theme.palette.primary.main}, ${theme.palette.secondary.main})`,
-                  backgroundClip: 'text',
-                  WebkitBackgroundClip: 'text',
-                  color: 'tranparent'
+                  fontWeight: 800,
+                  color: '#ff5722',
+                  textTransform: 'uppercase',
+                  letterSpacing: '1px',
+                  fontSize: { xs: '1.75rem', sm: '2rem' }
                 }}
               >
-                Welcome Back
+                GYMER PRO
               </Typography>
 
               <Typography
                 variant="body2"
                 sx={{
-                  color: 'text.secondary',
-                  mb: 1
+                  color: '#666',
+                  mb: 1,
+                  fontWeight: 600,
+                  fontSize: '1rem'
                 }}
               >
-                Author: TrungBuiDev
+                ĐĂNG NHẬP ĐỂ BẮT ĐẦU
               </Typography>
             </Box>
 
@@ -138,20 +172,11 @@ function LoginForm() {
                   sx={{
                     borderRadius: 2,
                     mb: 2,
-                    '& .MuiAlert-message': { overflow: 'hidden' }
+                    fontWeight: 600
                   }}
                 >
-                  Your email&nbsp;
-                  <Typography
-                    variant="span"
-                    sx={{
-                      fontWeight: 'bold',
-                      '&:hover': { color: theme.palette.warning.main }
-                    }}
-                  >
-                    {verifiedEmail}
-                  </Typography>
-                  &nbsp;has been verified.<br />Now you can login to enjoy our services! Have a good day!
+                  Email <strong>{verifiedEmail}</strong> đã được xác thực!<br />
+                  Sẵn sàng đăng nhập và chinh phục mục tiêu!
                 </Alert>
               )}
 
@@ -161,20 +186,11 @@ function LoginForm() {
                   sx={{
                     borderRadius: 2,
                     mb: 2,
-                    '& .MuiAlert-message': { overflow: 'hidden' }
+                    fontWeight: 600
                   }}
                 >
-                  An email has been sent to&nbsp;
-                  <Typography
-                    variant="span"
-                    sx={{
-                      fontWeight: 'bold',
-                      '&:hover': { color: theme.palette.warning.main }
-                    }}
-                  >
-                    {registeredEmail}
-                  </Typography>
-                  <br />Please check and verify your account before logging in!
+                  Email xác thực đã gửi đến <strong>{registeredEmail}</strong><br />
+                  Kiểm tra và xác thực tài khoản ngay!
                 </Alert>
               )}
             </Box>
@@ -185,7 +201,7 @@ function LoginForm() {
                 <TextField
                   autoFocus
                   fullWidth
-                  label="Email Address"
+                  label="Email"
                   type="email"
                   variant="outlined"
                   error={!!errors['email']}
@@ -198,8 +214,11 @@ function LoginForm() {
                   })}
                   sx={{
                     '& .MuiOutlinedInput-root': {
-                      borderRadius: 2
-                    }
+                      borderRadius: 2,
+                      '&:hover fieldset': { borderColor: '#ff5722' },
+                      '&.Mui-focused fieldset': { borderColor: '#ff5722' }
+                    },
+                    '& .MuiInputLabel-root.Mui-focused': { color: '#ff5722' }
                   }}
                 />
                 <FieldErrorAlert errors={errors} fieldName={'email'} />
@@ -208,7 +227,7 @@ function LoginForm() {
               <Box sx={{ mb: 3 }}>
                 <TextField
                   fullWidth
-                  label="Password"
+                  label="Mật khẩu"
                   type="password"
                   variant="outlined"
                   error={!!errors['password']}
@@ -221,8 +240,11 @@ function LoginForm() {
                   })}
                   sx={{
                     '& .MuiOutlinedInput-root': {
-                      borderRadius: 2
-                    }
+                      borderRadius: 2,
+                      '&:hover fieldset': { borderColor: '#ff5722' },
+                      '&.Mui-focused fieldset': { borderColor: '#ff5722' }
+                    },
+                    '& .MuiInputLabel-root.Mui-focused': { color: '#ff5722' }
                   }}
                 />
                 <FieldErrorAlert errors={errors} fieldName={'password'} />
@@ -234,45 +256,57 @@ function LoginForm() {
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
                 size="large"
                 fullWidth
                 sx={{
                   borderRadius: 2,
                   py: 1.5,
-                  textTransform: 'none',
+                  textTransform: 'uppercase',
                   fontSize: '1.1rem',
-                  fontWeight: 600,
-                  boxShadow: theme.shadows[2],
+                  fontWeight: 700,
+                  backgroundColor: '#ff5722',
+                  boxShadow: '0 4px 15px rgba(255, 87, 34, 0.3)',
                   '&:hover': {
-                    boxShadow: theme.shadows[4]
-                  }
+                    backgroundColor: '#e65100',
+                    boxShadow: '0 6px 20px rgba(255, 87, 34, 0.4)',
+                    transform: 'translateY(-2px)'
+                  },
+                  transition: 'all 0.3s ease',
+                  letterSpacing: '1px'
                 }}
               >
-                Sign In
+                Đăng nhập
               </Button>
             </CardActions>
 
             {/* Register Link */}
             <Box sx={{ p: 3, pt: 0, textAlign: 'center' }}>
-              <Typography variant="body2" sx={{ mb: 1, color: 'text.secondary' }}>
-                New to Trello MERN Stack Advanced?
+              <Typography variant="body2" sx={{ mb: 2, color: '#666', fontWeight: 600 }}>
+                CHƯA CÓ TÀI KHOẢN?
               </Typography>
               <Link to="/register" style={{ textDecoration: 'none' }}>
-                <Typography
+                <Button
+                  variant="outlined"
                   sx={{
-                    color: 'primary.main',
-                    fontWeight: 600,
+                    color: '#ff5722',
+                    borderColor: '#ff5722',
+                    fontWeight: 700,
+                    borderRadius: 2,
+                    px: 3,
+                    py: 1,
+                    textTransform: 'uppercase',
                     '&:hover': {
-                      color: theme.palette.warning.main,
-                      transform: 'translateY(-1px)',
-                      display: 'inline-block',
-                      transition: 'all 0.2s ease'
-                    }
+                      backgroundColor: '#ff5722',
+                      color: 'white',
+                      transform: 'translateY(-2px)',
+                      boxShadow: '0 4px 12px rgba(255, 87, 34, 0.3)'
+                    },
+                    transition: 'all 0.3s ease',
+                    letterSpacing: '0.5px'
                   }}
                 >
-                  Create your account
-                </Typography>
+                  Đăng ký ngay
+                </Button>
               </Link>
             </Box>
           </MuiCard>
@@ -281,4 +315,5 @@ function LoginForm() {
     </Box>
   )
 }
+
 export default LoginForm

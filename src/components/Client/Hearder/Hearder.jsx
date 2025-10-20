@@ -10,8 +10,11 @@ import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Link } from 'react-router-dom'
 import logo from '~/assets/logo.png'
-
+import { useSelector } from 'react-redux'
+import { selectCurrentUser } from '~/redux/user/userSlice'
+import Profiles from './Menus/Profiles'
 function Header() {
+  const currentUser = useSelector(selectCurrentUser)
   const [searchValue, setSearchValue] = useState('')
   const [showMobileSearch, setShowMobileSearch] = useState(false)
 
@@ -43,7 +46,7 @@ function Header() {
       <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, sm: 2 } }}>
         {/* Mobile Menu Button */}
         <IconButton
-          sx={{ 
+          sx={{
             display: { xs: 'flex', md: 'none' },
             color: 'white'
           }}
@@ -54,20 +57,20 @@ function Header() {
         {/* Logo */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            <img 
-              src={logo} 
-              alt="Logo" 
-              style={{ 
+            <img
+              src={logo}
+              alt="Logo"
+              style={{
                 height: '40px',
                 width: '40px',
                 objectFit: 'contain'
-              }} 
+              }}
             />
-            <Typography 
-              variant="span" 
-              sx={{ 
+            <Typography
+              variant="span"
+              sx={{
                 fontSize: { xs: '1rem', sm: '1.1rem' },
-                fontWeight: 'bold', 
+                fontWeight: 'bold',
                 color: 'white',
                 display: { xs: 'none', sm: 'block' }
               }}
@@ -80,8 +83,8 @@ function Header() {
         {/* Desktop Apps Icon */}
         <Link to="/boards">
           <Tooltip title="Board list">
-            <AppsIcon sx={{ 
-              color: 'white', 
+            <AppsIcon sx={{
+              color: 'white',
               display: { xs: 'none', md: 'block' }
             }} />
           </Tooltip>
@@ -89,9 +92,9 @@ function Header() {
       </Box>
 
       {/* --- CENTER SECTION: SEARCH BAR --- */}
-      <Box sx={{ 
+      <Box sx={{
         display: showMobileSearch ? 'flex' : { xs: 'none', md: 'flex' },
-        alignItems: 'center', 
+        alignItems: 'center',
         flex: 1,
         maxWidth: { md: '500px', lg: '600px' },
         mx: { xs: 1, sm: 2 }
@@ -110,8 +113,8 @@ function Header() {
                 <CloseIcon
                   onClick={() => setSearchValue('')}
                   fontSize="small"
-                  sx={{ 
-                    color: '#bdc3c7', 
+                  sx={{
+                    color: '#bdc3c7',
                     cursor: 'pointer',
                     '&:hover': { color: 'white' }
                   }}
@@ -136,7 +139,7 @@ function Header() {
                 borderColor: 'white',
               },
             },
-            '& input': { 
+            '& input': {
               color: 'white',
               '&::placeholder': {
                 color: 'rgba(255, 255, 255, 0.8)',
@@ -148,14 +151,14 @@ function Header() {
       </Box>
 
       {/* --- RIGHT SECTION: ICONS & BUTTONS --- */}
-      <Box sx={{ 
-        display: 'flex', 
-        alignItems: 'center', 
-        gap: { xs: 1, sm: 2 } 
+      <Box sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: { xs: 1, sm: 2 }
       }}>
         {/* Mobile Search Toggle */}
         <IconButton
-          sx={{ 
+          sx={{
             display: { xs: 'flex', md: 'none' },
             color: 'white'
           }}
@@ -167,7 +170,7 @@ function Header() {
         {/* Close Mobile Search */}
         {showMobileSearch && (
           <IconButton
-            sx={{ 
+            sx={{
               display: { xs: 'flex', md: 'none' },
               color: 'white'
             }}
@@ -184,9 +187,9 @@ function Header() {
 
         {/* Cart */}
         <Tooltip title="Giỏ hàng">
-          <Badge 
-            badgeContent={0} 
-            color="warning" 
+          <Badge
+            badgeContent={0}
+            color="warning"
             sx={{ cursor: 'pointer' }}
           >
             <LocalMallOutlinedIcon sx={{ color: 'white' }} />
@@ -194,6 +197,7 @@ function Header() {
         </Tooltip>
 
         {/* Login Button */}
+         {!currentUser && 
         <Link to="/login">
           <Button
             sx={{
@@ -202,8 +206,8 @@ function Header() {
               background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.18), rgba(20, 20, 20, 0.3))',
               color: 'white',
               border: 'none',
-              '&:hover': { 
-                color: 'black', 
+              '&:hover': {
+                color: 'black',
                 background: 'white',
                 transform: 'translateY(-1px)'
               },
@@ -214,14 +218,18 @@ function Header() {
             }}
             startIcon={<PersonOutlineIcon sx={{ display: { xs: 'none', sm: 'block' } }} />}
           >
-            <Typography sx={{ display: { xs: 'none', sm: 'block' } }}>
+           <Typography sx={{ display: { xs: 'none', sm: 'block' } }}>
               Đăng nhập
             </Typography>
-            <Typography sx={{ display: { xs: 'block', sm: 'none' }, fontSize: '0.75rem' }}>
-              Login
-            </Typography>
+
+
           </Button>
         </Link>
+        }
+        {currentUser && < Profiles />}
+
+
+
       </Box>
     </Box>
   )
