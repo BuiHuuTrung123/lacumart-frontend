@@ -92,7 +92,6 @@ const CategorySection = () => {
                 sx={{ 
                     mb: { xs: 3, sm: 4, md: 6 },
                     fontSize: { xs: '1.5rem', sm: '2rem', md: '2.5rem' },
-                    color: '#1a202c',
                     background: 'linear-gradient(45deg, #ff5722, #ff8c42)',
                     backgroundClip: 'text',
                     WebkitBackgroundClip: 'text',

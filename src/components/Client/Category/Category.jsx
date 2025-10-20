@@ -50,7 +50,6 @@ const Category = () => {
           sx={{ 
             fontWeight: 700,
             fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' },
-            color: 'text.primary',
             mb: { xs: 2, sm: 3, md: 4 },
             background: 'linear-gradient(45deg, #ff5722, #ff8c42)',
             backgroundClip: 'text',
