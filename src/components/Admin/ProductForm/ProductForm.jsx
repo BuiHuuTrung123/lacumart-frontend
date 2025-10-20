@@ -367,7 +367,6 @@ const ProductForm = ({ open, product, onClose, onSave }) => {
     // Validate form data
     const formErrors = validateForm(data);
     if (formErrors) {
-      console.log('Form errors:', formErrors);
       const firstError = Object.values(formErrors).find(error => error);
       if (firstError) toast.error(firstError);
       return;
