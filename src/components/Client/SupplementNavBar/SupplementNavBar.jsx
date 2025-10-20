@@ -253,7 +253,7 @@ const SupplementNavBar = () => {
           </Box>
 
           {/* Right side - Login button */}
-          <Typography
+          {/* <Typography
             onClick={handleOtherItemClick}
             sx={{
               fontSize: '14px',
@@ -272,7 +272,7 @@ const SupplementNavBar = () => {
             }}
           >
             Đăng Nhập
-          </Typography>
+          </Typography> */}
         </Box>
       </Container>
     </Box>

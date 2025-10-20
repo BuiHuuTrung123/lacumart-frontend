@@ -21,7 +21,7 @@ import {
   TrendingUp,
   Storage,
 } from '@mui/icons-material';
-import logo from '~/assets/logo.png';
+// import logo from '~/assets/logo.png';
 
 const menuItems = [
   { id: 'dashboard', label: 'Tổng quan', icon: DashboardIcon },
@@ -48,7 +48,7 @@ const DashboardSidebar = ({ activeSection, onSectionChange }) => {
       {/* Header với Logo */}
       <Box sx={{ p: 3, textAlign: 'center', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
         <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: 2, mb: 2 }}>
-          <img 
+          {/* <img 
             src={logo} 
             alt="LACU MART" 
             style={{ 
@@ -56,7 +56,7 @@ const DashboardSidebar = ({ activeSection, onSectionChange }) => {
               width: '50px',
               borderRadius: '8px',
             }} 
-          />
+          /> */}
           <Box>
             <Typography 
               variant="h5" 
