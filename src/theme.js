@@ -2,7 +2,7 @@ import { experimental_extendTheme as extendTheme } from '@mui/material/styles';
 
 // Kích thước responsive
 const HEADER_HEIGHT = { xs: '60px', sm: '70px', md: '80px' };
-const SUPPLEMENT_NAVBAR_HEIGHT = '48px';
+const SUPPLEMENT_NAVBAR_HEIGHT = { xs: '120px', sm: '130px', md: '130px', lg:'60px' };
 const BANNER_HEIGHT = { xs: '300px', sm: '400px', md: '500px', lg: '600px', xl: '700px' };
 const CATEGORY_HEIGHT = { xs: 'auto', md: '400px', lg: '500px' };
 const FOOTER_HEIGHT = { xs: 'auto', md: '56px' };

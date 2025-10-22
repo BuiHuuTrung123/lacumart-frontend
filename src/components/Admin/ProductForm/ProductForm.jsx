@@ -434,7 +434,7 @@ const ProductForm = ({ open, product, onClose, onSave }) => {
   };
 
   const onError = (errors) => {
-    console.log('Form errors:', errors);
+ 
     toast.error('Vui lòng kiểm tra lại thông tin form');
   };
 

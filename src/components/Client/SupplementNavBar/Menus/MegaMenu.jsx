@@ -72,6 +72,17 @@ const categories = [
       { name: 'Creapure', price: '680.000₫', image: bcaa },
       { name: 'Con-Cret', price: '750.000₫', image: bcaa }
     ]
+  },
+    { 
+    id: 7, 
+    name: 'Phụ kiện tập gym', 
+    sub: ['Bình lắc', 'Dây kháng lực', 'Phục kiện lacu', 'Phụ kiện Harbinger'], 
+    image: bcaa,
+    bestSellers: [
+      { name: 'Creatine Mono', price: '450.000₫', image: bcaa },
+      { name: 'Creapure', price: '680.000₫', image: bcaa },
+      { name: 'Con-Cret', price: '750.000₫', image: bcaa }
+    ]
   }
 ]
 
@@ -86,11 +97,10 @@ const MegaMenu = ({ showMenu, onClose }) => {
           width: '100%',
           bgcolor: 'white',
           py: 4,
-          maxHeight: '70vh',
-          overflowY: 'auto'
+        
         }}
       >
-        <Box sx={{ maxWidth: '1400px', mx: 'auto', px: 4 }}>
+        <Box sx={{ maxWidth: '1000px', mx: 'auto', px: 4 }}>
           <Grid container spacing={4}>
             {/* Cột trái: Danh mục chính */}
             <Grid item xs={3}>

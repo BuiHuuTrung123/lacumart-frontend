@@ -1,6 +1,6 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Box, Container, Typography } from '@mui/material';
-import MegaMenu from '~/components/Client/Hearder/Menus/MegaMenu';
+import MegaMenu from './Menus/MegaMenu';
 
 const SupplementNavBar = () => {
   const [showMegaMenu, setShowMegaMenu] = useState(false);
@@ -52,7 +52,7 @@ const SupplementNavBar = () => {
         alignItems: 'center',
         borderBottom: '2px solid',
         borderColor: 'primary.main',
-      
+        width: '100%',
         zIndex: 1000
       }}
     >
@@ -107,7 +107,7 @@ const SupplementNavBar = () => {
                     position: 'absolute',
                     top: '100%',
                     left: 0,
-                    width: '100vw',
+                    width: '55vw',
                     backgroundColor: 'white',
                     boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
                     borderTop: '3px solid #ff5722',

@@ -1,11 +1,36 @@
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Box, Button, Chip, Rating, IconButton } from '@mui/material';
 import { ShoppingCart, Favorite, FlashOn } from '@mui/icons-material';
-
+import { selectCurrentUser } from '~/redux/user/userSlice/'
+import { addItemToCartApi } from '~/redux/cart/cartSlice/'
+import { useSelector, useDispatch } from 'react-redux'
 const ProductCard = ({ product }) => {
-    console.log('Product data:', product);
-  console.log('Images value:', product.images);
-  console.log('Images type:', typeof product.images);
+  const dispatch = useDispatch()
+  const currentUser = useSelector(selectCurrentUser)
+  const handleAddProductToCart = (product) => {
+
+    // Kiểm tra user đã login chưa
+    if (!currentUser) {
+      toast.error('Vui lòng đăng nhập để thêm vào giỏ hàng')
+      return
+    }
+
+    // Tạo data để gửi lên API
+    const cartData = {
+      // hoặc currentUser.id
+       productId: product.id,  // hoặc product.id
+      // quantity: 1,
+      // price: product.price,
+      // name: product.name,
+      // images: product.images
+    }
+
+    // Dispatch async thunk
+    dispatch(addItemToCartApi(cartData))
+    
+ 
+  
+  }
   // Chỉ hiển thị sản phẩm còn hàng hoặc sắp hết
   if (product.stockStatus === 'out_of_stock') {
     return null;
@@ -14,18 +39,18 @@ const ProductCard = ({ product }) => {
   return (
     <Card
       sx={{
-        width: { 
-          xs: 140, 
-          sm: 160, 
-          md: 180, 
+        width: {
+          xs: 140,
+          sm: 160,
+          md: 180,
           lg: 200,
           xl: 220
         },
         maxWidth: '100%',
         borderRadius: { xs: 3, sm: 5 },
-       overflow: 'hidden',
+        overflow: 'hidden',
         backgroundColor: '#fff',
-         boxShadow: '0 2px 12px rgba(0,0,0,0.08), 0 0 0 1px #f0f0f0',
+        boxShadow: '0 2px 12px rgba(0,0,0,0.08), 0 0 0 1px #f0f0f0',
         transition: 'all 0.3s cubic-bezier(0.4, 0, 0.2, 1)',
         position: 'relative',
         cursor: 'pointer',
@@ -45,14 +70,14 @@ const ProductCard = ({ product }) => {
       }}
     >
       {/* Badge và Tag */}
-      <Box sx={{ 
-        position: 'absolute', 
-        top: 8, 
-        left: 8, 
-        zIndex: 2, 
-        display: 'flex', 
-        flexDirection: 'column', 
-        gap: 0.5 
+      <Box sx={{
+        position: 'absolute',
+        top: 8,
+        left: 8,
+        zIndex: 2,
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 0.5
       }}>
         {product.isBestSeller && (
           <Chip
@@ -64,7 +89,7 @@ const ProductCard = ({ product }) => {
               fontWeight: 700,
               fontSize: { xs: '8px', sm: '10px' },
               height: { xs: 18, sm: 22 },
-              '& .MuiChip-label': { 
+              '& .MuiChip-label': {
                 px: 0.5,
                 fontSize: { xs: '8px', sm: '10px' }
               },
@@ -82,7 +107,7 @@ const ProductCard = ({ product }) => {
               fontWeight: 700,
               fontSize: { xs: '8px', sm: '10px' },
               height: { xs: 16, sm: 20 },
-              '& .MuiChip-label': { 
+              '& .MuiChip-label': {
                 px: 0.5,
                 fontSize: { xs: '8px', sm: '10px' }
               },
@@ -126,10 +151,10 @@ const ProductCard = ({ product }) => {
         sx={{
           position: 'relative',
           overflow: 'hidden',
-          height: { 
-            xs: 150, 
-            sm: 180, 
-            md: 200, 
+          height: {
+            xs: 150,
+            sm: 180,
+            md: 200,
             lg: 250,
             xl: 300
           },
@@ -169,6 +194,7 @@ const ProductCard = ({ product }) => {
         >
           <Button
             variant="contained"
+            onClick={() => handleAddProductToCart(product)}
             size="small"
             sx={{
               flex: 1,
@@ -242,14 +268,14 @@ const ProductCard = ({ product }) => {
             precision={0.5}
             size="small"
             readOnly
-            sx={{ 
+            sx={{
               color: '#ffc107',
               fontSize: { xs: '14px', sm: '16px' }
             }}
           />
-          <Typography variant="body2" sx={{ 
-            color: '#666', 
-            fontSize: { xs: '10px', sm: '12px' } 
+          <Typography variant="body2" sx={{
+            color: '#666',
+            fontSize: { xs: '10px', sm: '12px' }
           }}>
             ({product.reviewCount || 124})
           </Typography>

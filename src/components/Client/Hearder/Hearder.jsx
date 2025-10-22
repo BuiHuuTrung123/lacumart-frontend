@@ -13,7 +13,16 @@ import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '~/redux/user/userSlice'
 import Profiles from './Menus/Profiles'
+import CartPopover from './Menus/CartPopover'
 function Header() {
+  const [showCartPopover, setShowCartPopover] = useState(false)
+  const handleOpenCartPopover = () => {
+    setShowCartPopover(true);
+  };
+  const handleCloseCartPopover = () => {
+    setShowCartPopover(false);
+  };
+
   const currentUser = useSelector(selectCurrentUser)
   const [searchValue, setSearchValue] = useState('')
   const [showMobileSearch, setShowMobileSearch] = useState(false)
@@ -186,45 +195,77 @@ function Header() {
         </Box> */}
 
         {/* Cart */}
-        <Tooltip title="Giỏ hàng">
-          <Badge
-            badgeContent={0}
-            color="warning"
-            sx={{ cursor: 'pointer' }}
+        {currentUser && (
+          <Tooltip title="Giỏ hàng">
+            <Badge
+              badgeContent={0}
+              color="warning"
+              onMouseEnter={handleOpenCartPopover}
+              sx={{ cursor: 'pointer' }}
+            >
+              <LocalMallOutlinedIcon sx={{ color: 'white' }} />
+            </Badge>
+          </Tooltip>
+        )
+        }
+
+        {/* Hiển thị cart popover */}
+        {showCartPopover && (
+          <Box
+            // ref={megaMenuRef}
+            onMouseLeave={handleCloseCartPopover}
+            sx={{
+              position: 'absolute',
+              top: '100%',
+              right: 0,
+              width: '30vw',
+              backgroundColor: 'white',
+              boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
+              borderTop: '3px solid #ff5722',
+              zIndex: 999,
+              maxHeight: 'calc(100vh - 120px)',
+              overflowY: 'auto'
+            }}
           >
-            <LocalMallOutlinedIcon sx={{ color: 'white' }} />
-          </Badge>
-        </Tooltip>
+            <CartPopover
+              showMenu={showCartPopover}
+              onClose={handleCloseCartPopover}
+            />
+          </Box>
+        )}
+
+
+
 
         {/* Login Button */}
-         {!currentUser && 
-        <Link to="/login">
-          <Button
-            sx={{
-              width: { xs: 'auto', sm: '140px' },
-              height: { xs: '36px', sm: '40px' },
-              background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.18), rgba(20, 20, 20, 0.3))',
-              color: 'white',
-              border: 'none',
-              '&:hover': {
-                color: 'black',
-                background: 'white',
-                transform: 'translateY(-1px)'
-              },
-              borderRadius: '8px',
-              px: { xs: 2, sm: 2 },
-              transition: 'all 0.3s ease',
-              fontSize: { xs: '0.75rem', sm: '0.875rem' }
-            }}
-            startIcon={<PersonOutlineIcon sx={{ display: { xs: 'none', sm: 'block' } }} />}
-          >
-           <Typography sx={{ display: { xs: 'none', sm: 'block' } }}>
-              Đăng nhập
-            </Typography>
+        {!currentUser &&
+          <Link to="/login">
+            <Button
+              sx={{
+                width: { xs: 'auto', sm: '140px' },
+                height: { xs: '36px', sm: '40px' },
+                background: 'linear-gradient(135deg, rgba(0, 0, 0, 0.18), rgba(20, 20, 20, 0.3))',
+                color: 'white',
+                border: 'none',
+                '&:hover': {
+                  color: 'black',
+                  background: 'white',
+                  transform: 'translateY(-1px)'
+                },
+                borderRadius: '8px',
+                px: { xs: 2, sm: 2 },
+                transition: 'all 0.3s ease',
+                fontSize: { xs: '0.75rem', sm: '0.875rem' }
+              }}
+              startIcon={<PersonOutlineIcon sx={{ display: { xs: 'none', sm: 'block' } }} />}
+            >
+              <Typography sx={{ display: { xs: 'none', sm: 'block' } }}>
+                Đăng nhập
+              </Typography>
 
 
-          </Button>
-        </Link>
+            </Button>
+          </Link>
         }
         {currentUser && < Profiles />}
 

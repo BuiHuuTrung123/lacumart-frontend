@@ -10,11 +10,11 @@ const categories = [
     { name: 'Whey Protein', color: '#ff5722' },
     { name: 'Sữa tăng cân', color: '#42a5f5' }, // ← ĐỔI THÀNH "Sữa tăng cân" (chữ thường)
     { name: 'BCAA Amino Acids', color: '#66bb6a' },
-    { name: 'Tăng Sức Mạnh', color: '#ffa726' },
-    { name: 'Hỗ Trợ Giảm Cân', color: '#ab47bc' },
+    { name: 'Tăng sức mạnh', color: '#ffa726' },
+    { name: 'Hỗ trợ giảm cân', color: '#ab47bc' },
     { name: 'Dầu cá', color: '#26c6da' },
-    { name: 'Vitamin Khoáng Chất', color: '#ec407a' },
-    { name: 'Phụ Kiện Tập Gym', color: '#78909c' },
+    { name: 'Vitamin khoáng chất', color: '#ec407a' },
+    { name: 'Phụ kiện tập gym', color: '#78909c' },
 ];
 
 const CategorySection = () => {
