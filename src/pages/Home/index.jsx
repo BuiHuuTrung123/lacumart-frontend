@@ -6,7 +6,7 @@ import Footer from '~/components/Client/Footer/Footer';
 import SupplementNavBar from '~/components/Client/SupplementNavBar/SupplementNavBar';
 
 // Lazy load các components
- const Banner = lazy(() => import('~/components/Client/Banner/Banner'));
+const Banner = lazy(() => import('~/components/Client/Banner/Banner'));
 const Category = lazy(() => import('~/components/Client/Category/Category'));
 const CategorySection = lazy(() => import('~/components/Client/Item/CategorySection'));
 
@@ -28,7 +28,7 @@ const CategorySectionSkeleton = () => (
             <Skeleton variant="text" sx={{ fontSize: '14px', width: '250px', mt: 0.5 }} />
           </Box>
         </Box>
-        
+
         {/* Products Grid Skeleton */}
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr 1fr', sm: '1fr 1fr 1fr', md: '1fr 1fr 1fr 1fr', lg: '1fr 1fr 1fr 1fr 1fr' }, gap: 3 }}>
           {[1, 2, 3, 4, 5].map((product) => (
@@ -42,18 +42,20 @@ const CategorySectionSkeleton = () => (
 
 function Home() {
   return (
-    <Box 
+    <Box
       sx={{
         minHeight: '100vh',
+        // maxWidth: '100vw',
         display: 'flex',
         flexDirection: 'column',
-        backgroundColor: 'background.default'
+        backgroundColor: 'background.default',
+        overflowX: 'hidden'
       }}
     >
       {/* Header & Navigation - Load ngay */}
       <Hearder />
       <SupplementNavBar />
-      
+
       {/* Main Content với Suspense */}
       <Box component="main" sx={{ flex: 1 }}>
         <Suspense fallback={<BannerSkeleton />}>

@@ -109,7 +109,7 @@ export const productSlice = createSlice({
 
             .addCase(deleteProductApi.fulfilled, (state, action) => {
                 state.loading = false
-                console.log( action.payload._id)
+         
                 state.products = state.products.filter(product => 
                     product._id !== action.payload._id
                 )

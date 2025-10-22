@@ -14,7 +14,10 @@ import { useSelector, useDispatch } from 'react-redux'
 import { selectCurrentUser, logoutUserAPI } from '~/redux/user/userSlice'
 import { useConfirm } from 'material-ui-confirm'
 import { Link } from 'react-router-dom'
+import { updateCurrentCart } from '~/redux/cart/cartSlice'
+
 function Profiles() {
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl)
   const handleClick = (event) => {
@@ -35,14 +38,16 @@ function Profiles() {
       cancellationText: 'Cancel',
       allowClose: true,
     })
-      .then( () => {
+      .then(() => {
         try {
-         dispatch(logoutUserAPI(false))
-        } catch (error) { 
+           
+          dispatch(logoutUserAPI(false))
+          dispatch(updateCurrentCart())
+        } catch (error) {
         }
       })
       .catch(() => {
-      
+
       });
   }
 
