@@ -26,20 +26,18 @@ const miniBanners = [
 
 function Banner() {
   return (
-    <Box sx={{ 
+    <Box sx={{
       width: '100%',
-      py: { xs: 0, sm: 2 }, // Tăng padding
-      backgroundColor: 'background.default'
+      backgroundColor: 'background.default',
+      py: { md: 0 },
+      
     }}>
-      {/* Banner chính - TĂNG CAO ĐÁNG KỂ */}
-      <Box sx={{ 
-        width: '100%', 
-        mb: { xs: 3, sm: 4 }, // Tăng margin bottom
-        px: { xs: 0, sm: 2, md: 3 }
+      <Box sx={{
+        width: '100%',
+        mb: { xs: 3, sm: 2 },
       }}>
         <Swiper
-          modules={[Navigation, Autoplay]}
-          navigation={true}
+          modules={[Autoplay]}
           spaceBetween={0}
           slidesPerView={1}
           centeredSlides={true}
@@ -57,7 +55,7 @@ function Banner() {
         >
           {mainBanners.map((banner) => (
             <SwiperSlide key={banner.id}>
-              <Box 
+              <Box
                 sx={{
                   width: '100%',
                   height: {
@@ -74,9 +72,9 @@ function Banner() {
                   cursor: 'pointer',
                   transition: 'all 0.5s ease-in-out',
                   transform: 'scale(1)',
-                  '&:hover': {
-                    transform: 'scale(1.02)',
-                  }
+                  // '&:hover': {
+                  //   transform: 'scale(1.02)',
+                  // }
                 }}
                 className="banner-main-container"
               >
@@ -90,10 +88,10 @@ function Banner() {
                     bottom: 0,
                     background: 'linear-gradient(45deg, rgba(255,87,34,0.15) 0%, rgba(255,140,66,0.08) 100%)',
                     opacity: 0,
-                    transition: 'all 0.3s ease',
-                    '&:hover': {
-                      opacity: 1,
-                    }
+                    // transition: 'all 0.3s ease',
+                    // // '&:hover': {
+                    // //   opacity: 1,
+                    // // }
                   }}
                 />
               </Box>
@@ -103,9 +101,9 @@ function Banner() {
       </Box>
 
       {/* Banner mini - TĂNG CAO */}
-      <Box sx={{ 
+      <Box sx={{
         width: '100%',
-        px: { xs: 2, sm: 3, md: 4 }
+
       }}>
         <Swiper
           modules={[Autoplay]}
@@ -137,7 +135,7 @@ function Banner() {
         >
           {miniBanners.map((banner) => (
             <SwiperSlide key={banner.id}>
-              <Box 
+              <Box
                 sx={{
                   width: '100%',
                   height: {
@@ -150,19 +148,19 @@ function Banner() {
                   backgroundSize: 'cover',
                   backgroundPosition: 'center center',
                   backgroundRepeat: 'no-repeat',
-                  borderRadius: { xs: '10px', sm: '14px', md: '18px' },
+                  // borderRadius: { xs: '10px', sm: '14px', md: '18px' },
                   cursor: 'pointer',
                   position: 'relative',
-                  boxShadow: '0 6px 20px rgba(0,0,0,0.1)',
+                  // boxShadow: '0 6px 20px rgba(0,0,0,0.1)',
                   transition: 'all 0.4s cubic-bezier(0.4, 0, 0.2, 1)',
                   overflow: 'hidden',
-                  '&:hover': {
-                    transform: 'translateY(-10px)',
-                    boxShadow: '0 20px 50px rgba(255,87,34,0.25)',
-                    '& .banner-mini-overlay': {
-                      opacity: 1,
-                    }
-                  }
+                  // '&:hover': {
+                  //   transform: 'translateY(-10px)',
+                  //   boxShadow: '0 20px 50px rgba(255,87,34,0.25)',
+                  //   '& .banner-mini-overlay': {
+                  //     opacity: 1,
+                  //   }
+                  // }
                 }}
                 className="banner-mini-container"
               >
@@ -249,16 +247,16 @@ function Banner() {
             animation: fadeInScale 0.6s ease-out;
           }
 
-          @keyframes slideInUp {
-            from {
-              opacity: 0;
-              transform: translateY(50px) scale(0.95);
-            }
-            to {
-              opacity: 1;
-              transform: translateY(0) scale(1);
-            }
-          }
+          // @keyframes slideInUp {
+          //   from {
+          //     opacity: 0;
+          //     transform: translateY(50px) scale(0.95);
+          //   }
+          //   to {
+          //     opacity: 1;
+          //     transform: translateY(0) scale(1);
+          //   }
+          // }
 
           @keyframes fadeInScale {
             from {

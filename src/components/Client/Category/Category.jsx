@@ -34,11 +34,10 @@ const Category = () => {
     >
       <Box
         sx={{
-          padding: { xs: '16px 0', sm: '20px 0', md: '20px 0' },
-          borderTop: '1px solid',
+          padding: { xs: '16px ', sm: '20px 0', md: '20px 50' },
           borderColor: 'divider',
           margin: '0 auto',
-          backgroundColor: 'background.paper',
+         py: {md: 15},
           width: '100%'
         }}
       >

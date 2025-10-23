@@ -17,13 +17,12 @@ import { Link } from 'react-router-dom'
 import { updateCurrentCart } from '~/redux/cart/cartSlice'
 
 function Profiles() {
+
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl)
-  
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
   }
-  
   const handleClose = () => {
     setAnchorEl(null);
   }
@@ -41,19 +40,20 @@ function Profiles() {
     })
       .then(() => {
         try {
+           
           dispatch(logoutUserAPI(false))
           dispatch(updateCurrentCart())
         } catch (error) {
-          // Handle error
         }
       })
       .catch(() => {
-        // Handle cancellation
+
       });
   }
 
   return (
     <Box>
+
       <Tooltip title="Tài khoản cá nhân">
         <IconButton
           onClick={handleClick}
@@ -63,15 +63,13 @@ function Profiles() {
           aria-haspopup="true"
           aria-expanded={open ? 'true' : undefined}
         >
-          <Avatar 
-            sx={{ width: 34, height: 34 }}
+          <Avatar sx={{ width: 60, height: 60 }}
             src={currentUser?.avata}
-            alt="loi anh"
-          >
-            M
-          </Avatar>
+            alt="loi anh">M</Avatar>
         </IconButton>
       </Tooltip>
+
+
 
       <Menu
         id="basic-menu-profiles"
@@ -81,85 +79,43 @@ function Profiles() {
         MenuListProps={{
           'aria-labelledby': 'basic-button-profiles'
         }}
-        // QUAN TRỌNG: Thêm các props này để ngăn scrollbar biến mất
-        disableScrollLock={true} // ← Ngăn MUI lock scroll
-        sx={{
-          // Đảm bảo menu không ảnh hưởng đến scrollbar
-          '& .MuiPaper-root': {
-            overflow: 'visible',
-            filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-            mt: 1.5,
-          },
-        }}
-        slotProps={{
-          paper: {
-            elevation: 0,
-            sx: {
-              overflow: 'visible',
-              filter: 'drop-shadow(0px 2px 8px rgba(0,0,0,0.32))',
-              mt: 1.5,
-              '& .MuiAvatar-root': {
-                width: 32,
-                height: 32,
-                ml: -0.5,
-                mr: 1,
-              },
-              '&::before': {
-                content: '""',
-                display: 'block',
-                position: 'absolute',
-                top: 0,
-                right: 14,
-                width: 10,
-                height: 10,
-                bgcolor: 'background.paper',
-                transform: 'translateY(-50%) rotate(45deg)',
-                zIndex: 0,
-              },
-            },
-          },
-        }}
-        transformOrigin={{ horizontal: 'right', vertical: 'top' }}
-        anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
+
       >
-        <Link to="/settings/account" style={{ color: 'inherit', textDecoration: 'none' }}>
+        <Link to="/settings/account" style={{ color: 'inherit' }}>
           <MenuItem
             sx={{
               '&:hover': { color: 'success.light' }
             }}
-            onClick={handleClose}
-          >
-            <Avatar src={currentUser?.avata} sx={{ width: 28, height: 28, mr: 1.5 }} />
-            Profile
+            onClick={handleClose}  >
+            <Avatar src={currentUser?.avata} sx={{ width: 28, height: 28, mr: 1.5 }} />   Profile
           </MenuItem>
         </Link>
 
         <Divider />
-        
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <PersonAdd fontSize="small" />
           </ListItemIcon>
           Add another account
         </MenuItem>
-        
         <MenuItem onClick={handleClose}>
           <ListItemIcon>
             <Settings fontSize="small" />
           </ListItemIcon>
           Settings
         </MenuItem>
-        
         <MenuItem
           sx={{
             '&:hover': { color: 'warning.dark' },
             '& .logout-icon': { color: 'warning.dark' }
           }}
           onClick={handleLogout}
+
         >
+
           <ListItemIcon>
             <Logout className='logout-icon' fontSize="small" />
-          </ListItemIcon>
+          </ListItemIcon >
           Logout
         </MenuItem>
       </Menu>

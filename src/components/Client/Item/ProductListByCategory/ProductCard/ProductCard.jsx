@@ -1,50 +1,70 @@
+// ProductCard.jsx
 import React from 'react';
 import { Card, CardMedia, CardContent, Typography, Box, Button, Chip, Rating, IconButton } from '@mui/material';
 import { ShoppingCart, Favorite, FlashOn } from '@mui/icons-material';
 import { selectCurrentUser } from '~/redux/user/userSlice/'
 import { addItemToCartApi } from '~/redux/cart/cartSlice/'
 import { useSelector, useDispatch } from 'react-redux'
+import { useNavigate } from 'react-router-dom'
+import { toast } from 'react-toastify';
+import { fetchProductByIdAPI } from '~/redux/product/productSlice';
+
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch()
+  const navigate = useNavigate()
   const currentUser = useSelector(selectCurrentUser)
-  const handleAddProductToCart = (product) => {
 
-    // Kiểm tra user đã login chưa
+  // Xử lý click vào card (chỉ card, không phải nút)
+  const handleCardClick = (e) => {
+    // Chỉ điều hướng khi click trực tiếp vào card, không phải từ nút
+    if (!e.target.closest('.product-actions')) {
+      const productId = product.id ;
+    
+      navigate(`/productdetail/${productId}`)
+    }
+  }
+
+  const handleAddProductToCart = (e) => {
+    e.stopPropagation(); // ← QUAN TRỌNG: Ngăn sự kiện bubble lên card
+    
     if (!currentUser) {
       toast.error('Vui lòng đăng nhập để thêm vào giỏ hàng')
       return
     }
 
-    // Tạo data để gửi lên API
     const cartData = {
-      // hoặc currentUser.id
-       productId: product.id,  // hoặc product.id
-      // quantity: 1,
-      // price: product.price,
-      // name: product.name,
-      // images: product.images
+      productId: product.id || product._id,
+      quantity: 1,
     }
 
-    // Dispatch async thunk
     dispatch(addItemToCartApi(cartData))
     
- 
-  
   }
-  // Chỉ hiển thị sản phẩm còn hàng hoặc sắp hết
+
+  const handleQuickBuy = (e) => {
+    e.stopPropagation(); // ← QUAN TRỌNG: Ngăn sự kiện bubble lên card
+    // Xử lý mua nhanh
+  }
+
+  const handleFavoriteClick = (e) => {
+    e.stopPropagation(); // ← QUAN TRỌNG: Ngăn sự kiện bubble lên card
+    // Xử lý yêu thích
+  }
+
   if (product.stockStatus === 'out_of_stock') {
     return null;
   }
 
   return (
     <Card
+      onClick={handleCardClick}
       sx={{
         width: {
           xs: 140,
           sm: 160,
           md: 180,
           lg: 200,
-          xl: 220
+          xl: 320
         },
         maxWidth: '100%',
         borderRadius: { xs: 3, sm: 5 },
@@ -58,7 +78,6 @@ const ProductCard = ({ product }) => {
         '&:hover': {
           boxShadow: '0 12px 32px rgba(255, 87, 34, 0.15), 0 0 0 1px #ff5722',
           transform: { xs: 'translateY(-4px)', sm: 'translateY(-6px)' },
-          // border: '1px solid #ff5722',
         },
         '&:hover .product-actions': {
           opacity: 1,
@@ -96,7 +115,6 @@ const ProductCard = ({ product }) => {
             }}
           />
         )}
-        {/* Hiển thị badge sắp hết hàng */}
         {product.stockStatus === 'low_stock' && (
           <Chip
             label="SẮP HẾT"
@@ -118,7 +136,7 @@ const ProductCard = ({ product }) => {
 
       {/* Nút yêu thích */}
       <Box
-        className="product-actions"
+        className="product-actions" // ← THÊM CLASS NÀY
         sx={{
           position: 'absolute',
           top: 8,
@@ -130,6 +148,7 @@ const ProductCard = ({ product }) => {
         }}
       >
         <IconButton
+          onClick={handleFavoriteClick} // ← THÊM ONCLICK
           sx={{
             width: { xs: 24, sm: 32 },
             height: { xs: 24, sm: 32 },
@@ -177,7 +196,7 @@ const ProductCard = ({ product }) => {
 
         {/* Overlay hành động */}
         <Box
-          className="product-actions"
+          className="product-actions" // ← THÊM CLASS NÀY
           sx={{
             position: 'absolute',
             bottom: 0,
@@ -194,7 +213,7 @@ const ProductCard = ({ product }) => {
         >
           <Button
             variant="contained"
-            onClick={() => handleAddProductToCart(product)}
+            onClick={handleAddProductToCart} // ← ĐÃ CÓ STOP PROPAGATION
             size="small"
             sx={{
               flex: 1,
@@ -216,6 +235,7 @@ const ProductCard = ({ product }) => {
           <Button
             variant="outlined"
             size="small"
+            onClick={handleQuickBuy} // ← ĐÃ CÓ STOP PROPAGATION
             sx={{
               fontSize: { xs: '10px', sm: '12px' },
               fontWeight: 600,

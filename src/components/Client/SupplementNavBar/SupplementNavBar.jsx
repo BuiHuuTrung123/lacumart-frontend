@@ -45,7 +45,6 @@ const SupplementNavBar = () => {
       sx={{
         backgroundColor: 'secondary.main',
         position: 'sticky', // THÊM DÒNG NÀY
-        top: (theme) => theme.trelloCustom.headerHeight,
         color: 'white',
         height: (theme) => theme.trelloCustom.supplementNavbarHeight,
         display: 'flex',
@@ -62,7 +61,7 @@ const SupplementNavBar = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            height: '100%',
+            height: '100%', 
             gap: 4
           }}
         >
@@ -87,7 +86,7 @@ const SupplementNavBar = () => {
                   alignItems: 'center',
                   borderBottom: showMegaMenu ? '2px solid' : '2px solid transparent',
                   borderColor: 'primary.main',
-                  color: showMegaMenu ? 'primary.main' : 'white',
+                  color: showMegaMenu ? 'primary.main]' : 'white',
                   px: 1,
                   '&:hover': { 
                     color: 'primary.main'
