@@ -49,7 +49,8 @@ function Home() {
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: 'background.default',
-        overflowX: 'hidden'
+        overflowX: 'hidden',
+        
       }}
     >
       {/* Header & Navigation - Load ngay */}

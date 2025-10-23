@@ -1,7 +1,5 @@
-import React, { useState } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import Box from '@mui/material/Box'
-import ModeSelect from '~/components/ModeSelect/ModeSelect'
-import AppsIcon from '@mui/icons-material/Apps'
 import { Typography, Button, TextField, InputAdornment, Tooltip, Badge, IconButton } from '@mui/material'
 import SearchIcon from '@mui/icons-material/Search'
 import CloseIcon from '@mui/icons-material/Close'
@@ -9,30 +7,78 @@ import LocalMallOutlinedIcon from '@mui/icons-material/LocalMallOutlined'
 import PersonOutlineIcon from '@mui/icons-material/PersonOutline'
 import MenuIcon from '@mui/icons-material/Menu'
 import { Link } from 'react-router-dom'
-// import logo from '~/assets/logo.png'
 import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '~/redux/user/userSlice'
+import { selectCurrentCart } from '~/redux/cart/cartSlice'
 import Profiles from './Menus/Profiles'
 import CartPopover from './Menus/CartPopover'
+import logo from '~/assets/logo.png'
+
 function Header() {
   const [showCartPopover, setShowCartPopover] = useState(false)
-  const handleOpenCartPopover = () => {
-    setShowCartPopover(true);
-  };
-  const handleCloseCartPopover = () => {
-    setShowCartPopover(false);
-  };
-
+  const cartPopoverRef = useRef(null)
+  const cartIconRef = useRef(null)
+  
   const currentUser = useSelector(selectCurrentUser)
+  const currentCart = useSelector(selectCurrentCart)
+  
   const [searchValue, setSearchValue] = useState('')
   const [showMobileSearch, setShowMobileSearch] = useState(false)
+
+  // Debug để xem currentCart có thay đổi không
+ 
+
+  // Tính tổng số lượng sản phẩm trong giỏ hàng từ Redux
+  const getTotalCartItems = () => {
+    if (!currentCart?.items || currentCart.items.length === 0) return 0
+    
+    const total = currentCart.items.reduce((total, item) => {
+      return total + (item.quantity || 1)
+    }, 0)
+    
+    console.log('Calculated total:', total) // Debug
+    return total
+  }
+
+  // Xử lý mở/đóng cart popover khi click
+  const handleToggleCartPopover = () => {
+    setShowCartPopover(!showCartPopover)
+  }
+
+  // Xử lý đóng cart popover
+  const handleCloseCartPopover = () => {
+    setShowCartPopover(false)
+  }
+
+  // Xử lý click outside để đóng cart popover
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (
+        cartPopoverRef.current && 
+        !cartPopoverRef.current.contains(event.target) &&
+        cartIconRef.current && 
+        !cartIconRef.current.contains(event.target)
+      ) {
+        setShowCartPopover(false)
+      }
+    }
+
+    if (showCartPopover) {
+      document.addEventListener('mousedown', handleClickOutside)
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside)
+    }
+  }, [showCartPopover])
 
   return (
     <Box
       sx={{
         position: 'sticky',
         top: 0,
-        zIndex: 1100,
+        zIndex: 1200,
+        boxShadow: 1,
         width: '100%',
         height: (theme) => theme.trelloCustom.headerHeight,
         display: 'flex',
@@ -53,7 +99,6 @@ function Header() {
     >
       {/* --- LEFT SECTION: LOGO + MENU --- */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, sm: 2 } }}>
-        {/* Mobile Menu Button */}
         <IconButton
           sx={{
             display: { xs: 'flex', md: 'none' },
@@ -63,18 +108,17 @@ function Header() {
           <MenuIcon />
         </IconButton>
 
-        {/* Logo */}
         <Link to="/" style={{ display: 'flex', alignItems: 'center', textDecoration: 'none' }}>
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-            {/* <img
+            <img
               src={logo}
               alt="Logo"
               style={{
-                height: '40px',
-                width: '40px',
+                height: '90px',
+                width: '90px',
                 objectFit: 'contain'
               }}
-            /> */}
+            />
             <Typography
               variant="span"
               sx={{
@@ -87,16 +131,6 @@ function Header() {
               LACU MART
             </Typography>
           </Box>
-        </Link>
-
-        {/* Desktop Apps Icon */}
-        <Link to="/boards">
-          <Tooltip title="Board list">
-            <AppsIcon sx={{
-              color: 'white',
-              display: { xs: 'none', md: 'block' }
-            }} />
-          </Tooltip>
         </Link>
       </Box>
 
@@ -163,9 +197,9 @@ function Header() {
       <Box sx={{
         display: 'flex',
         alignItems: 'center',
-        gap: { xs: 1, sm: 2 }
+        gap: { xs: 1, sm: 2 },
+        paddingRight: '10px'
       }}>
-        {/* Mobile Search Toggle */}
         <IconButton
           sx={{
             display: { xs: 'flex', md: 'none' },
@@ -176,7 +210,6 @@ function Header() {
           <SearchIcon />
         </IconButton>
 
-        {/* Close Mobile Search */}
         {showMobileSearch && (
           <IconButton
             sx={{
@@ -189,42 +222,46 @@ function Header() {
           </IconButton>
         )}
 
-        {/* Theme Toggle */}
-        {/* <Box sx={{ display: { xs: 'none', sm: 'block' } }}>
-          <ModeSelect />
-        </Box> */}
-
-        {/* Cart */}
+        {/* Cart - SỬA QUAN TRỌNG: Đảm bảo component re-render */}
         {currentUser && (
           <Tooltip title="Giỏ hàng">
             <Badge
-              badgeContent={0}
+              // badgeContent={getTotalCartItems()}
               color="warning"
-              onMouseEnter={handleOpenCartPopover}
-              sx={{ cursor: 'pointer' }}
+              ref={cartIconRef}
+              onClick={handleToggleCartPopover}
+              sx={{ 
+                cursor: 'pointer',
+                '& .MuiBadge-badge': {
+                  fontSize: '0.7rem',
+                  fontWeight: 'bold',
+                  minWidth: '18px',
+                  height: '18px',
+                  transform: 'scale(1) translate(50%, -50%)'
+                }
+              }}
             >
               <LocalMallOutlinedIcon sx={{ color: 'white' }} />
             </Badge>
           </Tooltip>
-        )
-        }
+        )}
 
-        {/* Hiển thị cart popover */}
         {showCartPopover && (
           <Box
-            // ref={megaMenuRef}
-            onMouseLeave={handleCloseCartPopover}
+            ref={cartPopoverRef}
             sx={{
               position: 'absolute',
               top: '100%',
-              right: 0,
-              width: '30vw',
+              right: 23,
+              width: '400px',
+              maxWidth: '90vw',
               backgroundColor: 'white',
               boxShadow: '0 20px 60px rgba(0,0,0,0.2)',
               borderTop: '3px solid #ff5722',
               zIndex: 999,
               maxHeight: 'calc(100vh - 120px)',
-              overflowY: 'auto'
+              borderRadius: '0 0 8px 8px',
+              overflow: 'hidden'
             }}
           >
             <CartPopover
@@ -234,11 +271,7 @@ function Header() {
           </Box>
         )}
 
-
-
-
-        {/* Login Button */}
-        {!currentUser &&
+        {!currentUser && (
           <Link to="/login">
             <Button
               sx={{
@@ -262,15 +295,11 @@ function Header() {
               <Typography sx={{ display: { xs: 'none', sm: 'block' } }}>
                 Đăng nhập
               </Typography>
-
-
             </Button>
           </Link>
-        }
-        {currentUser && < Profiles />}
-
-
-
+        )}
+        
+        {currentUser && <Profiles />}
       </Box>
     </Box>
   )

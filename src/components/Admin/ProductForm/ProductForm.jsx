@@ -551,11 +551,11 @@ const ProductForm = ({ open, product, onClose, onSave }) => {
                   </Alert>
                 )}
 
-                {imagePreviews.length === 0 && (
+                {/* {imagePreviews.length === 0 && (
                   <Alert severity="warning" sx={{ borderRadius: 2 }}>
                     {VALIDATION_MESSAGES.IMAGES_REQUIRED}
                   </Alert>
-                )}
+                )} */}
               </Paper>
             </Grid>
 

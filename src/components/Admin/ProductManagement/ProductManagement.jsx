@@ -178,9 +178,9 @@ const ProductManagement = () => {
                         <Typography variant="subtitle2" fontWeight={600}>
                           {product.name || 'Chưa có tên'}
                         </Typography>
-                        <Typography variant="body2" color="textSecondary">
+                        {/* <Typography variant="body2" color="textSecondary">
                           {product.shortDescription || product.description || 'Không có mô tả'}
-                        </Typography>
+                        </Typography> */}
                       </Box>
                     </Box>
                   </TableCell>

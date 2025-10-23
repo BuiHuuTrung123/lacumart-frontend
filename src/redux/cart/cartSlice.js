@@ -15,6 +15,14 @@ export const addItemToCartApi = createAsyncThunk(
     return respone.data
   }
 )
+
+export const deleItemToCartApi = createAsyncThunk(
+  'cart/deleItemToCartApi',
+  async ({ productId, cartActiveId }) => {
+    const respone = await authorizeAxiosInstance.delete(`${API_ROOT}/v1/carts/${productId}`, { data: { cartActiveId } })
+    return respone.data
+  }
+)
 export const getCartDetailApi = createAsyncThunk(
   'cart/getCartDetailApi',
   async (userId) => {
@@ -28,9 +36,9 @@ export const cartSlice = createSlice({
   initialState,
   //reducers : nơi xử lý dữ liệu đồng bộ
   reducers: {
-         updateCurrentCart: (state, action) => {
-            state.currentCart = null
-        },
+    updateCurrentCart: (state, action) => {
+      state.currentCart = null
+    },
   },
   //extraReducers nơi xử lý dữ liệu bất đồng bộ 
 
@@ -65,6 +73,24 @@ export const cartSlice = createSlice({
         toast.success('Đã thêm vào giỏ hàng!')
       })
       .addCase(addItemToCartApi.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error.message
+        toast.error('Lỗi khi thêm vào giỏ hàng')
+      })
+      // DELETE PRODUCT IN CART 
+      .addCase(deleItemToCartApi.pending, (state) => {
+        state.loading = true
+        state.error = null
+      })
+      .addCase(deleItemToCartApi.fulfilled, (state, action) => {
+        state.loading = false
+        console.log('action', action.payload)
+        state.currentCart.items = state.currentCart.items.filter(
+          product => product.productId !== action.payload.productId
+        )
+          toast.success('Xóa sản phẩm thành công')
+      })
+      .addCase(deleItemToCartApi.rejected, (state, action) => {
         state.loading = false
         state.error = action.error.message
         toast.error('Lỗi khi thêm vào giỏ hàng')

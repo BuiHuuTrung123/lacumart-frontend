@@ -8,7 +8,7 @@ const BannerSkeleton = () => {
       {/* Main Banner Skeleton */}
       <Box sx={{ width: '100%', mb: { xs: 3, sm: 4 }, px: { xs: 0, sm: 2, md: 3 } }}>
         <Skeleton 
-          variant="rounded"
+          // variant="rounded"
           sx={{
             width: '100%',
             height: {

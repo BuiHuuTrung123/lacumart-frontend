@@ -99,7 +99,7 @@ export const activeBoardSlice = createSlice({
            
         
             const incomingMoveCard = action.payload
-            // console.log(incomingMoveCard)
+      
             const column = state.currentActiveBoard.columns.find(i => i._id === incomingMoveCard.columnId)
             if (column) {
                 column.cards = column.cards.filter(i => i._id !== incomingMoveCard._id)

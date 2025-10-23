@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '~/redux/user/userSlice'
 import Home from '~/pages/Home'
 import AdminDashboard from '~/pages/Admin/Dashboard'
+ import ProductDetail from '~/components/Client/Item/ProductDetail/ProductDetail'
 const ProtectedRoute = ({ user }) => {
   if (!user) return <Navigate to='/Home' replace={true} />
   return <Outlet />
@@ -27,7 +28,7 @@ function App() {
       <Route path='/login' element={<Auth />} />
       <Route path='/register' element={<Auth />} />
       <Route path='/account/verification' element={<AccoutVerification />} />
-
+      <Route path='/productdetail/:id' element={<ProductDetail />} />
 
       {/* 404 route*/}
       <Route path='*' element={<NotFound />} />
