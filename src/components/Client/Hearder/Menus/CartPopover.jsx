@@ -187,7 +187,7 @@ const CartPopover = ({ showMenu, onClose }) => {
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
                             <Typography sx={{ fontWeight: 600, fontSize: '15px' }}>Tổng cộng:</Typography>
                             <Typography sx={{ fontWeight: 700, color: '#ff5722', fontSize: '18px' }}>
-                                {formatPrice(calculateTotal())}
+                                {formatPrice(currentCart.total)}
                             </Typography>
                         </Box>
 
