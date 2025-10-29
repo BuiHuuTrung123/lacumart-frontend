@@ -15,7 +15,13 @@ export const addItemToCartApi = createAsyncThunk(
     return respone.data
   }
 )
-
+export const updateQualityItemToCartApi = createAsyncThunk(
+  'cart/updateQualityItemToCartApi',
+  async ({ productId, cartActiveId, signal }) => {
+    const respone = await authorizeAxiosInstance.put(`${API_ROOT}/v1/carts/${productId}`, { data: { cartActiveId, signal } })
+    return respone.data
+  }
+)
 export const deleItemToCartApi = createAsyncThunk(
   'cart/deleItemToCartApi',
   async ({ productId, cartActiveId }) => {
@@ -79,6 +85,23 @@ export const cartSlice = createSlice({
         state.error = action.error.message
         toast.error('Lỗi khi thêm vào giỏ hàng')
       })
+      // UPDATE QUALITY ITEM TO CART
+      .addCase(updateQualityItemToCartApi.pending, (state) => {
+        state.loading = true
+        state.error = null
+      })
+      .addCase(updateQualityItemToCartApi.fulfilled, (state, action) => {
+        state.loading = false
+        // console.log('action', action.payload)
+        state.currentCart = action.payload
+        toast.success('Cập nhật số lượng thành công')
+      })
+      .addCase(updateQualityItemToCartApi.rejected, (state, action) => {
+        state.loading = false
+        state.error = action.error.message
+        toast.error('Lỗi khi thêm vào giỏ hàng')
+      })
+
       // DELETE PRODUCT IN CART 
       .addCase(deleItemToCartApi.pending, (state) => {
         state.loading = true
@@ -86,11 +109,9 @@ export const cartSlice = createSlice({
       })
       .addCase(deleItemToCartApi.fulfilled, (state, action) => {
         state.loading = false
-        console.log('action', action.payload)
-        state.currentCart.items = state.currentCart.items.filter(
-          product => product.productId !== action.payload.productId
-        )
-          toast.success('Xóa sản phẩm thành công')
+     
+        state.currentCart = action.payload
+        toast.success('Xóa sản phẩm thành công')
       })
       .addCase(deleItemToCartApi.rejected, (state, action) => {
         state.loading = false

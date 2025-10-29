@@ -2,14 +2,14 @@ import React, { useState, useEffect } from 'react'
 import { Box, Typography, Grid, Fade, Button, Divider, IconButton } from '@mui/material'
 import { Delete, Add, Remove, ShoppingCart } from '@mui/icons-material'
 import { useSelector, useDispatch } from 'react-redux'
-import { selectCurrentCart, getCartDetailApi, deleItemToCartApi } from '~/redux/cart/cartSlice'
+import { selectCurrentCart, getCartDetailApi, deleItemToCartApi, updateQualityItemToCartApi } from '~/redux/cart/cartSlice'
 import { selectCurrentUser } from '~/redux/user/userSlice/'
 
 const CartPopover = ({ showMenu, onClose }) => {
     const currentCart = useSelector(selectCurrentCart)
     const currentUser = useSelector(selectCurrentUser)
     const dispatch = useDispatch()
-    
+
     useEffect(() => {
         dispatch(getCartDetailApi(currentUser._id))
     }, [dispatch])
@@ -27,7 +27,15 @@ const CartPopover = ({ showMenu, onClose }) => {
             currency: 'VND'
         }).format(price)
     }
+    const handleUpdateIncreaseQualityItemToCartApi = (productId) => {
 
+        dispatch(updateQualityItemToCartApi({ productId, cartActiveId: currentCart._id, signal: 'increase' }))
+    }
+
+     const handleUpdateReduceQualityItemToCartApi = (productId) => {
+
+        dispatch(updateQualityItemToCartApi({ productId, cartActiveId: currentCart._id, signal: 'reduce' }))
+    }
     const handleDeleteProductInCart = (productId) => {
         dispatch(deleItemToCartApi({ productId, cartActiveId: currentCart._id }))
     }
@@ -52,14 +60,14 @@ const CartPopover = ({ showMenu, onClose }) => {
                 </Box>
 
                 {/* Cart Items - Chiếm không gian còn lại */}
-                <Box sx={{ 
-                    flex: 1, 
+                <Box sx={{
+                    flex: 1,
                     overflow: 'auto',
                     minHeight: 0 // ← QUAN TRỌNG: cho flex scroll hoạt động
                 }}>
                     {!currentCart?.items || currentCart.items.length === 0 ? (
-                        <Box sx={{ 
-                            textAlign: 'center', 
+                        <Box sx={{
+                            textAlign: 'center',
                             py: 4,
                             height: '100%',
                             display: 'flex',
@@ -122,33 +130,35 @@ const CartPopover = ({ showMenu, onClose }) => {
 
                                             {/* Quantity controls */}
                                             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, mt: 1 }}>
-                                                <IconButton 
-                                                    size="small" 
-                                                    sx={{ 
+                                                <IconButton
+                                                    size="small"
+                                                    sx={{
                                                         border: '1px solid #ddd',
                                                         width: 28,
                                                         height: 28
                                                     }}
+                                                     onClick={() => { handleUpdateReduceQualityItemToCartApi(item.productId) }}
                                                 >
                                                     <Remove sx={{ fontSize: 16 }} />
                                                 </IconButton>
 
-                                                <Typography sx={{ 
-                                                    minWidth: '30px', 
-                                                    textAlign: 'center', 
+                                                <Typography sx={{
+                                                    minWidth: '30px',
+                                                    textAlign: 'center',
                                                     fontWeight: 600,
                                                     fontSize: '14px'
                                                 }}>
                                                     {item.quantity}
                                                 </Typography>
 
-                                                <IconButton 
-                                                    size="small" 
-                                                    sx={{ 
+                                                <IconButton
+                                                    size="small"
+                                                    sx={{
                                                         border: '1px solid #ddd',
                                                         width: 28,
                                                         height: 28
                                                     }}
+                                                    onClick={() => { handleUpdateIncreaseQualityItemToCartApi(item.productId) }}
                                                 >
                                                     <Add sx={{ fontSize: 16 }} />
                                                 </IconButton>
@@ -178,11 +188,11 @@ const CartPopover = ({ showMenu, onClose }) => {
 
                 {/* Footer - Total & Checkout */}
                 {currentCart?.items && currentCart.items.length > 0 && (
-                    <Box sx={{ 
-                        p: 2, 
+                    <Box sx={{
+                        p: 2,
                         bgcolor: '#f8fafc',
                         borderTop: '1px solid #e0e0e0',
-                        flexShrink: 0 
+                        flexShrink: 0
                     }}>
                         <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
                             <Typography sx={{ fontWeight: 600, fontSize: '15px' }}>Tổng cộng:</Typography>
