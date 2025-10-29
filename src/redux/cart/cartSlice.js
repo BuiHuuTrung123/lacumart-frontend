@@ -69,7 +69,9 @@ export const cartSlice = createSlice({
       })
       .addCase(addItemToCartApi.fulfilled, (state, action) => {
         state.loading = false
+        console.log('action', action.payload)
         state.currentCart = action.payload
+
         toast.success('Đã thêm vào giỏ hàng!')
       })
       .addCase(addItemToCartApi.rejected, (state, action) => {
