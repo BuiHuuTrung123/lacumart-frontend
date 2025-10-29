@@ -32,11 +32,8 @@ function Header() {
   const getTotalCartItems = () => {
     if (!currentCart?.items || currentCart.items.length === 0) return 0
     
-    const total = currentCart.items.reduce((total, item) => {
-      return total + (item.quantity || 1)
-    }, 0)
-    
-    console.log('Calculated total:', total) // Debug
+    const total = currentCart.items.length
+
     return total
   }
 
@@ -226,7 +223,7 @@ function Header() {
         {currentUser && (
           <Tooltip title="Giỏ hàng">
             <Badge
-              // badgeContent={getTotalCartItems()}
+              badgeContent={getTotalCartItems()}
               color="warning"
               ref={cartIconRef}
               onClick={handleToggleCartPopover}
