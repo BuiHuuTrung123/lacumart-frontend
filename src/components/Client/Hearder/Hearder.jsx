@@ -58,7 +58,7 @@ function Hearder() {
   const getTotalCartItems = () => {
     // if (!currentCart?.items || currentCart.items.length === 0) return 0
     // reduce((total, item) => total + item.quantity, 0)
-    return currentCart.items.length 
+    return currentCart?.items.length 
 
   }
 
