@@ -13,7 +13,10 @@ const CartPopover = ({ showMenu, onClose }) => {
     const dispatch = useDispatch()
 
     useEffect(() => {
-        dispatch(getCartDetailApi(currentUser._id))
+        if(currentUser){
+              dispatch(getCartDetailApi(currentUser?._id))
+        }
+      
     }, [dispatch])
 
     //Điều hướng đến trang chi tiết giỏ hàng

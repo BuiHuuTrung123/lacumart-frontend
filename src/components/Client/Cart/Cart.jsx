@@ -44,7 +44,10 @@ function Cart() {
     const [activeStep, setActiveStep] = useState(0)
 
     useEffect(() => {
-        dispatch(getCartDetailApi(currentUser._id))
+        if (currentUser) {
+            dispatch(getCartDetailApi(currentUser._id))
+        }
+
     }, [dispatch])
 
     const handleUpdateIncreaseQualityItemToCartApi = (productId) => {
