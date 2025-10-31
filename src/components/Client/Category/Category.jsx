@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Box, Typography, useTheme, useMediaQuery, Container } from '@mui/material';
+import { useNavigate } from 'react-router-dom';
 import bcaa from '~/assets/Category/bcaa.jpg';
 import dauca from '~/assets/Category/dauca.jpg';
 import dungcu from '~/assets/Category/dungcu.webp';
@@ -24,12 +25,17 @@ const Category = () => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
   const isTablet = useMediaQuery(theme.breakpoints.down('md'));
+  const navigate = useNavigate();
+
+  const handleCategoryClick = (categoryName) => {
+    navigate(`/category/${encodeURIComponent(categoryName.toLowerCase())}`);
+  };
 
   return (
-    <Container 
-      maxWidth="xl" 
-      sx={{ 
-        px: { xs: 2, sm: 3, md: 4 } 
+    <Container
+      maxWidth="xl"
+      sx={{
+        px: { xs: 2, sm: 3, md: 4 }
       }}
     >
       <Box
@@ -37,16 +43,16 @@ const Category = () => {
           padding: { xs: '16px ', sm: '20px 0', md: '20px 50' },
           borderColor: 'divider',
           margin: '0 auto',
-         py: {md: 15},
+          py: { md: 15 },
           width: '100%'
         }}
       >
-        {/* Tiêu đề Danh Mục Sản Phẩm - ĐÃ CÓ */}
-        <Typography 
-          variant="h4" 
-          gutterBottom 
-          align="center" 
-          sx={{ 
+        {/* Tiêu đề Danh Mục Sản Phẩm */}
+        <Typography
+          variant="h4"
+          gutterBottom
+          align="center"
+          sx={{
             fontWeight: 700,
             fontSize: { xs: '1.5rem', sm: '1.75rem', md: '2rem' },
             mb: { xs: 2, sm: 3, md: 4 },
@@ -60,8 +66,8 @@ const Category = () => {
         </Typography>
 
         {/* Grid container căn giữa */}
-        <Box sx={{ 
-          display: 'flex', 
+        <Box sx={{
+          display: 'flex',
           justifyContent: 'center',
           width: '100%'
         }}>
@@ -77,7 +83,7 @@ const Category = () => {
               maxWidth: '100%',
               scrollbarWidth: 'thin',
               scrollbarColor: `${theme.palette.divider} transparent`,
-              '&::-webkit-scrollbar': { 
+              '&::-webkit-scrollbar': {
                 height: '6px',
               },
               '&::-webkit-scrollbar-track': {
@@ -106,19 +112,21 @@ const Category = () => {
                   },
                 }}
               >
+                {/* Category Image - Clickable */}
                 <Box
+                  onClick={() => handleCategoryClick(category.name)}
                   sx={{
-                    width: { 
-                      xs: 80, 
-                      sm: 100, 
-                      md: 120, 
-                      lg: 140 
+                    width: {
+                      xs: 80,
+                      sm: 100,
+                      md: 120,
+                      lg: 140
                     },
-                    height: { 
-                      xs: 80, 
-                      sm: 100, 
-                      md: 120, 
-                      lg: 140 
+                    height: {
+                      xs: 80,
+                      sm: 100,
+                      md: 120,
+                      lg: 140
                     },
                     borderRadius: '50%',
                     overflow: 'hidden',
@@ -158,20 +166,24 @@ const Category = () => {
                     }}
                   />
                 </Box>
+                
+                {/* Category Name - Clickable */}
                 <Typography
                   variant="subtitle1"
+                  onClick={() => handleCategoryClick(category.name)}
                   sx={{
                     fontWeight: 600,
-                    fontSize: { 
-                      xs: '0.75rem', 
-                      sm: '0.875rem', 
-                      md: '1rem' 
+                    fontSize: {
+                      xs: '0.75rem',
+                      sm: '0.875rem',
+                      md: '1rem'
                     },
                     color: 'text.primary',
                     transition: 'all 0.3s ease',
                     maxWidth: { xs: 80, sm: 100, md: 120, lg: 140 },
                     lineHeight: 1.3,
-                    '&:hover': { 
+                    cursor: 'pointer',
+                    '&:hover': {
                       color: category.color.split(',')[1].trim(),
                     },
                   }}
@@ -184,11 +196,11 @@ const Category = () => {
         </Box>
 
         {/* Navigation dots indicator */}
-        <Box 
-          sx={{ 
-            display: 'flex', 
-            justifyContent: 'center', 
-            gap: 1, 
+        <Box
+          sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            gap: 1,
             mt: 2,
             opacity: 0.6
           }}
