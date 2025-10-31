@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 import Hearder from '~/components/Client/Hearder/Hearder'
 import Footer from '~/components/Client/Footer/Footer'
-import { 
-  Box, 
-  Container, 
-  Grid, 
-  Typography, 
-  Button, 
-  Chip, 
-  Rating, 
+import {
+  Box,
+  Container,
+  Grid,
+  Typography,
+  Button,
+  Chip,
+  Rating,
   Divider,
   IconButton,
   Breadcrumbs,
@@ -22,28 +22,31 @@ import {
   ListItemIcon,
   ListItemText
 } from '@mui/material';
-import { 
-  ShoppingCart, 
-  Favorite, 
-  Share, 
+import {
+  ShoppingCart,
+  Favorite,
+  Share,
   FlashOn,
   LocalShipping,
   AssignmentReturn,
   Security,
   Star,
-  ArrowBack 
+  ArrowBack
 } from '@mui/icons-material';
-import { useParams, useNavigate } from 'react-router-dom';
-import { useDispatch, useSelector } from 'react-redux';
+import { useParams, useNavigate } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
 import {
   selectCurrentProduct,
   fetchProductByIdAPI
-} from '~/redux/product/productSlice';
-
+} from '~/redux/product/productSlice'
+import { addItemToCartApi } from '~/redux/cart/cartSlice'
+import { selectCurrentUser } from '~/redux/user/userSlice'
+import { toast } from 'react-toastify'
 function ProductDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
+    const currentUser = useSelector(selectCurrentUser)
   const product = useSelector(selectCurrentProduct);
   const [selectedImage, setSelectedImage] = useState(0);
   const [tabValue, setTabValue] = useState(0);
@@ -58,14 +61,37 @@ function ProductDetail() {
     setTabValue(newValue);
   };
 
-  const handleAddToCart = () => {
-    // Xử lý thêm vào giỏ hàng
-    console.log('Thêm vào giỏ hàng:', product);
+  const handleAddToCart = (e) => {
+    e.stopPropagation(); // ← QUAN TRỌNG: Ngăn sự kiện bubble lên card
+
+    if (!currentUser) {
+      toast.error('Vui lòng đăng nhập để thêm vào giỏ hàng')
+      return
+    }
+
+    const cartData = {
+      productId: product.id || product._id,
+      quantity: 1,
+    }
+
+    dispatch(addItemToCartApi(cartData))
+
   };
 
-  const handleBuyNow = () => {
-    // Xử lý mua ngay
-    console.log('Mua ngay:', product);
+  const handleBuyNow = (e) => {
+    e.stopPropagation(); // ← QUAN TRỌNG: Ngăn sự kiện bubble lên card
+     if (!currentUser) {
+       toast.error('Vui lòng đăng nhập để thêm vào giỏ hàng')
+       return
+     }
+ 
+     const cartData = {
+       productId: product.id || product._id,
+       quantity: 1,
+     }
+ 
+     dispatch(addItemToCartApi(cartData))
+    navigate(`/cartDetail/${currentUser._id}`)
   };
 
   if (!product) {
@@ -91,20 +117,20 @@ function ProductDetail() {
   return (
     <Box sx={{ backgroundColor: '#f8fafc', minHeight: '100vh' }}>
       <Hearder />
-      
+
       {/* Main Content */}
       <Container maxWidth="xl" sx={{ py: 4 }}>
         {/* Breadcrumb */}
         <Breadcrumbs sx={{ mb: 3 }}>
-          <Link 
-            color="inherit" 
-            href="/" 
+          <Link
+            color="inherit"
+            href="/"
             sx={{ cursor: 'pointer', '&:hover': { color: '#ff5722' } }}
           >
             Trang chủ
           </Link>
-          <Link 
-            color="inherit" 
+          <Link
+            color="inherit"
             sx={{ cursor: 'pointer', '&:hover': { color: '#ff5722' } }}
           >
             {product.mainCategory}
@@ -131,15 +157,15 @@ function ProductDetail() {
                 {/* Badges */}
                 <Box sx={{ position: 'absolute', top: 16, left: 16 }}>
                   {product.stock?.status === 'low_stock' && (
-                    <Chip 
-                      label="SẮP HẾT HÀNG" 
+                    <Chip
+                      label="SẮP HẾT HÀNG"
                       color="warning"
                       sx={{ fontWeight: 'bold', mr: 1 }}
                     />
                   )}
                   {product.price?.discount > 0 && (
-                    <Chip 
-                      label={`-${product.price.discount}%`} 
+                    <Chip
+                      label={`-${product.price.discount}%`}
                       color="error"
                       sx={{ fontWeight: 'bold' }}
                     />
@@ -158,7 +184,7 @@ function ProductDetail() {
                     onClick={() => setSelectedImage(index)}
                     sx={{
                       width: 120,
-                      height:120,
+                      height: 150,
                       objectFit: 'cover',
                       borderRadius: 2,
                       cursor: 'pointer',
@@ -182,7 +208,7 @@ function ProductDetail() {
               <Typography variant="h3" fontWeight="bold" gutterBottom sx={{ color: '#1a202c' }}>
                 {product.name}
               </Typography>
-              
+
               <Box display="flex" alignItems="center" gap={2} mb={2}>
                 <Rating value={4.5} precision={0.5} readOnly sx={{ color: '#ffc107' }} />
                 <Typography variant="body2" color="text.secondary">
@@ -207,8 +233,8 @@ function ProductDetail() {
                 )}
               </Box>
               {product.price?.discount > 0 && (
-                <Chip 
-                  label={`Tiết kiệm ${(product.price.original - product.price.current).toLocaleString()}₫`} 
+                <Chip
+                  label={`Tiết kiệm ${(product.price.original - product.price.current).toLocaleString()}₫`}
                   color="success"
                   variant="outlined"
                 />
@@ -219,32 +245,32 @@ function ProductDetail() {
             <Box sx={{ mb: 3 }}>
               <List dense>
                 <ListItem>
-                  <ListItemText 
-                    primary="Định lượng" 
+                  <ListItemText
+                    primary="Định lượng"
                     secondary={product.quantification}
                     primaryTypographyProps={{ fontWeight: 'bold' }}
                   />
                 </ListItem>
                 <ListItem>
-                  <ListItemText 
-                    primary="Thương hiệu" 
+                  <ListItemText
+                    primary="Thương hiệu"
                     secondary={product.brand}
                     primaryTypographyProps={{ fontWeight: 'bold' }}
                   />
                 </ListItem>
                 <ListItem>
-                  <ListItemText 
-                    primary="Danh mục" 
+                  <ListItemText
+                    primary="Danh mục"
                     secondary={product.mainCategory}
                     primaryTypographyProps={{ fontWeight: 'bold' }}
                   />
                 </ListItem>
                 <ListItem>
-                  <ListItemText 
-                    primary="Tình trạng" 
+                  <ListItemText
+                    primary="Tình trạng"
                     secondary={
-                      <Chip 
-                        label={product.stock?.quantity > 0 ? 'CÒN HÀNG' : 'HẾT HÀNG'} 
+                      <Chip
+                        label={product.stock?.quantity > 0 ? 'CÒN HÀNG' : 'HẾT HÀNG'}
                         color={product.stock?.quantity > 0 ? 'success' : 'error'}
                         size="small"
                       />
@@ -315,7 +341,7 @@ function ProductDetail() {
                     <ListItemIcon>
                       <LocalShipping sx={{ color: '#ff5722' }} />
                     </ListItemIcon>
-                    <ListItemText 
+                    <ListItemText
                       primary="Miễn phí vận chuyển"
                       secondary="Cho đơn hàng từ 500.000₫"
                     />
@@ -324,7 +350,7 @@ function ProductDetail() {
                     <ListItemIcon>
                       <AssignmentReturn sx={{ color: '#ff5722' }} />
                     </ListItemIcon>
-                    <ListItemText 
+                    <ListItemText
                       primary="Đổi trả trong 7 ngày"
                       secondary="Hoàn tiền 100%"
                     />
@@ -333,7 +359,7 @@ function ProductDetail() {
                     <ListItemIcon>
                       <Security sx={{ color: '#ff5722' }} />
                     </ListItemIcon>
-                    <ListItemText 
+                    <ListItemText
                       primary="Bảo hành chính hãng"
                       secondary="12 tháng"
                     />
@@ -341,17 +367,18 @@ function ProductDetail() {
                 </List>
               </CardContent>
             </Card>
+
           </Grid>
         </Grid>
 
         {/* Product Description & Details */}
         <Box sx={{ mt: 6 }}>
           <Card sx={{ borderRadius: 3, boxShadow: 3 }}>
-            <Tabs 
-              value={tabValue} 
+            <Tabs
+              value={tabValue}
               onChange={handleTabChange}
-              sx={{ 
-                borderBottom: 1, 
+              sx={{
+                borderBottom: 1,
                 borderColor: 'divider',
                 '& .MuiTab-root': {
                   fontSize: '1rem',
@@ -373,7 +400,7 @@ function ProductDetail() {
                   <Typography variant="body1" paragraph sx={{ lineHeight: 1.8, fontSize: '1.1rem' }}>
                     {product.description}
                   </Typography>
-                  
+
                   <Box sx={{ mt: 4 }}>
                     <Typography variant="h6" gutterBottom>
                       🎯 Đặc điểm nổi bật:
@@ -395,7 +422,7 @@ function ProductDetail() {
                   </Box>
                 </Box>
               )}
-              
+
               {tabValue === 1 && (
                 <Box>
                   <Typography variant="h5" gutterBottom>
@@ -417,7 +444,7 @@ function ProductDetail() {
                   </List>
                 </Box>
               )}
-              
+
               {tabValue === 2 && (
                 <Box>
                   <Typography variant="h5" gutterBottom>

@@ -15,8 +15,11 @@ import { selectCurrentUser, logoutUserAPI } from '~/redux/user/userSlice'
 import { useConfirm } from 'material-ui-confirm'
 import { Link } from 'react-router-dom'
 import { updateCurrentCart } from '~/redux/cart/cartSlice'
+import { useSearchParams, useNavigate } from 'react-router-dom'
+
 
 function Profiles() {
+   const navigate = useNavigate()
   const [anchorEl, setAnchorEl] = React.useState(null);
   const open = Boolean(anchorEl)
   
@@ -122,7 +125,7 @@ function Profiles() {
         transformOrigin={{ horizontal: 'right', vertical: 'top' }}
         anchorOrigin={{ horizontal: 'right', vertical: 'bottom' }}
       >
-        <Link to="/settings/account" style={{ color: 'inherit', textDecoration: 'none' }}>
+        <Link to={`userProfile/${currentUser._id}`} style={{ color: 'inherit', textDecoration: 'none' }}>
           <MenuItem
             sx={{
               '&:hover': { color: 'success.light' }

@@ -7,7 +7,7 @@ import { addItemToCartApi } from '~/redux/cart/cartSlice/'
 import { useSelector, useDispatch } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify';
-import { fetchProductByIdAPI } from '~/redux/product/productSlice';
+
 
 const ProductCard = ({ product }) => {
   const dispatch = useDispatch()
@@ -18,15 +18,15 @@ const ProductCard = ({ product }) => {
   const handleCardClick = (e) => {
     // Chỉ điều hướng khi click trực tiếp vào card, không phải từ nút
     if (!e.target.closest('.product-actions')) {
-      const productId = product.id ;
-    
-      navigate(`/productdetail/${productId}`)
+      const productId = product.id;
+
+      navigate(`/productDetail/${productId}`)
     }
   }
 
   const handleAddProductToCart = (e) => {
     e.stopPropagation(); // ← QUAN TRỌNG: Ngăn sự kiện bubble lên card
-    
+
     if (!currentUser) {
       toast.error('Vui lòng đăng nhập để thêm vào giỏ hàng')
       return
@@ -38,12 +38,22 @@ const ProductCard = ({ product }) => {
     }
 
     dispatch(addItemToCartApi(cartData))
-    
-  }
 
+  }
   const handleQuickBuy = (e) => {
     e.stopPropagation(); // ← QUAN TRỌNG: Ngăn sự kiện bubble lên card
-    // Xử lý mua nhanh
+    if (!currentUser) {
+      toast.error('Vui lòng đăng nhập để thêm vào giỏ hàng')
+      return
+    }
+
+    const cartData = {
+      productId: product.id || product._id,
+      quantity: 1,
+    }
+
+    dispatch(addItemToCartApi(cartData))
+   navigate(`/cartDetail/${currentUser._id}`)
   }
 
   const handleFavoriteClick = (e) => {

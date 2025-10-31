@@ -6,7 +6,11 @@ import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '~/redux/user/userSlice'
 import Home from '~/pages/Home'
 import AdminDashboard from '~/pages/Admin/Dashboard'
- import ProductDetail from '~/components/Client/Item/ProductDetail/ProductDetail'
+import ProductDetail from '~/components/Client/Item/ProductDetail/ProductDetail'
+import Cart from '~/components/Client/Cart/Cart'
+import Checkout from '~/components/Client/Checkout/Checkout'
+import ProductByCategory from '~/components/Client/Category/ProductByCategory/ProductByCategory'
+import UserProfile from '~/components/Client/User/UserProfile'
 const ProtectedRoute = ({ user }) => {
   if (!user) return <Navigate to='/Home' replace={true} />
   return <Outlet />
@@ -28,8 +32,12 @@ function App() {
       <Route path='/login' element={<Auth />} />
       <Route path='/register' element={<Auth />} />
       <Route path='/account/verification' element={<AccoutVerification />} />
-      <Route path='/productdetail/:id' element={<ProductDetail />} />
-
+      <Route path='/productDetail/:id' element={<ProductDetail />} />
+      <Route path='/cartDetail/:id' element={<Cart />} />
+      <Route path='/checkout/:id' element={<Checkout />} />
+        <Route path='/userProfile/:id' element={<UserProfile />} />
+      // Trong App.js hoặc router
+      <Route path="/category/:categoryName" element={<ProductByCategory />} />
       {/* 404 route*/}
       <Route path='*' element={<NotFound />} />
       {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}

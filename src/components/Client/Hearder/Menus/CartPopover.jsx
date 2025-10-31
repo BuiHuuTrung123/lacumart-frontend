@@ -4,8 +4,10 @@ import { Delete, Add, Remove, ShoppingCart } from '@mui/icons-material'
 import { useSelector, useDispatch } from 'react-redux'
 import { selectCurrentCart, getCartDetailApi, deleItemToCartApi, updateQualityItemToCartApi } from '~/redux/cart/cartSlice'
 import { selectCurrentUser } from '~/redux/user/userSlice/'
+import { useNavigate } from 'react-router-dom'
 
 const CartPopover = ({ showMenu, onClose }) => {
+    const navigate = useNavigate()
     const currentCart = useSelector(selectCurrentCart)
     const currentUser = useSelector(selectCurrentUser)
     const dispatch = useDispatch()
@@ -14,10 +16,14 @@ const CartPopover = ({ showMenu, onClose }) => {
         dispatch(getCartDetailApi(currentUser._id))
     }, [dispatch])
 
-    // Tính tổng tiền
-    const calculateTotal = () => {
-        if (!currentCart?.items) return 0
-        return currentCart.items.reduce((total, item) => total + (item.price * item.quantity), 0)
+    //Điều hướng đến trang chi tiết giỏ hàng
+    const handleViewCartDetail = () => {
+        navigate(`/cartDetail/${currentUser._id}`)
+        onClose() // Đóng popover khi điều hướng
+    }
+ 
+const handleCheckout = () => {
+        navigate(`/checkout/${currentUser._id}`)
     }
 
     // Format tiền VND
@@ -32,7 +38,7 @@ const CartPopover = ({ showMenu, onClose }) => {
         dispatch(updateQualityItemToCartApi({ productId, cartActiveId: currentCart._id, signal: 'increase' }))
     }
 
-     const handleUpdateReduceQualityItemToCartApi = (productId) => {
+    const handleUpdateReduceQualityItemToCartApi = (productId) => {
 
         dispatch(updateQualityItemToCartApi({ productId, cartActiveId: currentCart._id, signal: 'reduce' }))
     }
@@ -137,7 +143,7 @@ const CartPopover = ({ showMenu, onClose }) => {
                                                         width: 28,
                                                         height: 28
                                                     }}
-                                                     onClick={() => { handleUpdateReduceQualityItemToCartApi(item.productId) }}
+                                                    onClick={() => { handleUpdateReduceQualityItemToCartApi(item.productId) }}
                                                 >
                                                     <Remove sx={{ fontSize: 16 }} />
                                                 </IconButton>
@@ -203,6 +209,7 @@ const CartPopover = ({ showMenu, onClose }) => {
 
                         <Button
                             fullWidth
+                             onClick={handleCheckout}
                             variant="contained"
                             sx={{
                                 bgcolor: '#ff5722',
@@ -221,6 +228,7 @@ const CartPopover = ({ showMenu, onClose }) => {
                         </Button>
 
                         <Button
+                            onClick={handleViewCartDetail}
                             fullWidth
                             variant="outlined"
                             sx={{
