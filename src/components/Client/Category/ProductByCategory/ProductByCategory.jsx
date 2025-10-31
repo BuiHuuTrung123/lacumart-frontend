@@ -691,7 +691,7 @@ const ProductsByCategory = () => {
                                                                 background: 'linear-gradient(45deg, #ff5722, #ff8c42)',
                                                                 backgroundClip: 'text',
                                                                 WebkitBackgroundClip: 'text',
-                                                                color: 'transparent',
+                                                               
                                                             }}
                                                         >
                                                             {product.price?.current?.toLocaleString('vi-VN')}₫
