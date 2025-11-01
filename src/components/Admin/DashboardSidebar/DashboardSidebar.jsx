@@ -26,6 +26,7 @@ import Profiles from './Menus/Profiles'
 const menuItems = [
   { id: 'dashboard', label: 'Tổng quan', icon: DashboardIcon },
   { id: 'products', label: 'Sản phẩm', icon: Inventory },
+  { id: 'categories', label: 'Danh mục', icon: LocalMall },
   { id: 'orders', label: 'Đơn hàng', icon: ShoppingCart },
   { id: 'inventory', label: 'Kho hàng', icon: Warehouse },
   { id: 'revenue', label: 'Doanh thu', icon: Assessment },

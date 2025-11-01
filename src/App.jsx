@@ -4,7 +4,7 @@ import Auth from '~/pages/Auth/Auth'
 import AccoutVerification from '~/pages/Auth/AccoutVerifycation'
 import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '~/redux/user/userSlice'
-import Home from '~/pages/Home'
+import Home from '~/pages/Client/Home'
 import AdminDashboard from '~/pages/Admin/Dashboard'
 import ProductDetail from '~/components/Client/Item/ProductDetail/ProductDetail'
 import Cart from '~/components/Client/Cart/Cart'
@@ -32,7 +32,7 @@ function App() {
       <Route path='/login' element={<Auth />} />
       <Route path='/register' element={<Auth />} />
       <Route path='/account/verification' element={<AccoutVerification />} />
-      <Route path='/productDetail/:id' element={<ProductDetail />} />
+      <Route path='/productDetail/:productName' element={<ProductDetail />} />
       <Route path='/cartDetail/:id' element={<Cart />} />
       <Route path='/checkout/:id' element={<Checkout />} />
         <Route path='/userProfile/:id' element={<UserProfile />} />

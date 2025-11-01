@@ -3,7 +3,8 @@ import { activeBoardReducer } from './activeBoard/activeBoardSlice'
 import { userReducer } from './user/userSlice'
 import { activeCardReducer } from './activeCard/activeCardSlice'
 import { productReducer } from './product/productSlice'
-import {cartReducer} from './cart/cartSlice'
+import { cartReducer } from './cart/cartSlice'
+import { categoryReducer } from './category/categorySlice'
 //Store = cái kho lớn
 //Reducer = nhân viên phụ trách từng kệ trong kho   
 //State = dữ liệu đang nằm trên từng kệ đó
@@ -21,7 +22,7 @@ import storage from 'redux-persist/lib/storage'; // default là localStorage
 const rootPersistConfig = {
     key: 'root', // key này dùng để lưu trữ trạng thái của redux
     storage: storage, // Bên này sẽ dùng localStorage
-    whitelist: ['user','cart'], // Bên này sẽ lưu lại state của slice user
+    whitelist: ['user', 'cart'], // Bên này sẽ lưu lại state của slice user
     // blacklist: ['user'], // Bên này sẽ không lưu lại state của slice user
 };
 //combine các Reducers
@@ -32,7 +33,8 @@ const reducers = combineReducers({
     user: userReducer,
     activeCard: activeCardReducer,
     product: productReducer,
-    cart: cartReducer
+    cart: cartReducer,
+    category: categoryReducer
 })
 const persistedReducer = persistReducer(rootPersistConfig, reducers)
 export const store = configureStore({
