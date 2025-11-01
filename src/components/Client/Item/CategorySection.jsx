@@ -46,6 +46,7 @@ const CategorySection = () => {
     const formatProductForCard = (product) => {
         return {
             id: product._id,
+            slug: product.slug,
             name: product.name,
             images: product.images || '/images/default-product.jpg',
             price: `₫${product.price?.current?.toLocaleString() || '0'}`,

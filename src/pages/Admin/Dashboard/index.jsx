@@ -3,22 +3,24 @@ import React, { useState } from 'react';
 import { Box, Grid, Paper, Typography, Container } from '@mui/material';
 import DashboardSidebar from '~/components/Admin/DashboardSidebar/DashboardSidebar';
 import ProductManagement from '~/components/Admin/ProductManagement/ProductManagement';
-
+import CategoryManagement from '~/components/Admin/CategoryManagement/CategoryManagement';
 const AdminDashboard = () => {
   const [activeSection, setActiveSection] = useState('products');
 
   const renderSection = () => {
     switch (activeSection) {
       case 'products':
-        return <ProductManagement />;
+        return <ProductManagement />
+      case 'categories':
+        return <CategoryManagement />
       case 'orders':
-        return <OrderManagement />;
+        return <OrderManagement />
       case 'inventory':
-        return <InventoryManagement />;
+        return <InventoryManagement />
       case 'revenue':
-        return <RevenueManagement />;
+        return <RevenueManagement />
       default:
-        return <ProductManagement />;
+        return <ProductManagement />
     }
   };
 
@@ -26,7 +28,7 @@ const AdminDashboard = () => {
     <Box sx={{ display: 'flex', minHeight: '100vh', backgroundColor: '#f5f5f5' }}>
       {/* Sidebar */}
       <DashboardSidebar activeSection={activeSection} onSectionChange={setActiveSection} />
-      
+
       {/* Main Content */}
       <Box sx={{ flex: 1, p: 3 }}>
         <Container maxWidth="xl">

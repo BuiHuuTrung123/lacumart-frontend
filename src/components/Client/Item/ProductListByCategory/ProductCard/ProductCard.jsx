@@ -19,8 +19,8 @@ const ProductCard = ({ product }) => {
     // Chỉ điều hướng khi click trực tiếp vào card, không phải từ nút
     if (!e.target.closest('.product-actions')) {
       const productId = product.id;
-
-      navigate(`/productDetail/${productId}`)
+   console.log('product.slug:', product.slug);
+      navigate(`/productDetail/${product.slug}`)
     }
   }
 

@@ -43,19 +43,19 @@ import { addItemToCartApi } from '~/redux/cart/cartSlice'
 import { selectCurrentUser } from '~/redux/user/userSlice'
 import { toast } from 'react-toastify'
 function ProductDetail() {
-  const { id } = useParams();
+  const { productName } = useParams();
   const dispatch = useDispatch();
   const navigate = useNavigate();
-    const currentUser = useSelector(selectCurrentUser)
+  const currentUser = useSelector(selectCurrentUser)
   const product = useSelector(selectCurrentProduct);
   const [selectedImage, setSelectedImage] = useState(0);
   const [tabValue, setTabValue] = useState(0);
 
   useEffect(() => {
-    if (id) {
-      dispatch(fetchProductByIdAPI(id));
+    if (productName) {
+      dispatch(fetchProductByIdAPI(productName));
     }
-  }, [id, dispatch]);
+  }, [productName, dispatch]);
 
   const handleTabChange = (event, newValue) => {
     setTabValue(newValue);
@@ -80,17 +80,17 @@ function ProductDetail() {
 
   const handleBuyNow = (e) => {
     e.stopPropagation(); // ← QUAN TRỌNG: Ngăn sự kiện bubble lên card
-     if (!currentUser) {
-       toast.error('Vui lòng đăng nhập để thêm vào giỏ hàng')
-       return
-     }
- 
-     const cartData = {
-       productId: product.id || product._id,
-       quantity: 1,
-     }
- 
-     dispatch(addItemToCartApi(cartData))
+    if (!currentUser) {
+      toast.error('Vui lòng đăng nhập để thêm vào giỏ hàng')
+      return
+    }
+
+    const cartData = {
+      productId: product.id || product._id,
+      quantity: 1,
+    }
+
+    dispatch(addItemToCartApi(cartData))
     navigate(`/cartDetail/${currentUser._id}`)
   };
 

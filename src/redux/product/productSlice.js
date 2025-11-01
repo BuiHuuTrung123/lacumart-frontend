@@ -63,8 +63,8 @@ export const deleteProductApi = createAsyncThunk(
 // Thêm vào productSlice.js
 export const fetchProductByIdAPI = createAsyncThunk(
     'product/fetchProductByIdAPI',
-    async (productId) => {
-        const response = await authorizeAxiosInstance.get(`${API_ROOT}/v1/products/${productId}`)
+    async (productName) => {
+        const response = await authorizeAxiosInstance.get(`${API_ROOT}/v1/products/${productName}`)
         return response.data
     }
 )
