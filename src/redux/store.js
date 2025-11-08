@@ -21,7 +21,7 @@ import storage from 'redux-persist/lib/storage'; // default là localStorage
 const rootPersistConfig = {
     key: 'root', // key này dùng để lưu trữ trạng thái của redux
     storage: storage, // Bên này sẽ dùng localStorage
-    whitelist: ['user', 'cart'], // Bên này sẽ lưu lại state của slice user
+    whitelist: ['user', 'cart', 'order','product'], // Bên này sẽ lưu lại state của slice user
     // blacklist: ['user'], // Bên này sẽ không lưu lại state của slice user
 }
 //combine các Reducers

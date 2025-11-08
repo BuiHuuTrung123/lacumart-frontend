@@ -44,12 +44,13 @@ const CategorySection = () => {
 
     // Format dữ liệu cho ProductCard
     const formatProductForCard = (product) => {
+        
         return {
             id: product._id,
             slug: product.slug,
             name: product.name,
             images: product.images || '/images/default-product.jpg',
-            price: `₫${product.price?.current?.toLocaleString() || '0'}`,
+            price: product?.price,
             originalPrice: product.price?.discount > 0 ? 
                 `₫${product.price?.original?.toLocaleString() || '0'}` : null,
             discount: product.price?.discount > 0 ? product.price.discount.toString() : null,

@@ -2,6 +2,7 @@ import React from 'react'
 import { CardContent, Typography, Box, Rating } from '@mui/material'
 
 const ProductContent = ({ product }) => {
+
   return (
     <CardContent
       sx={{
@@ -58,7 +59,7 @@ const ProductContent = ({ product }) => {
             lineHeight: 1,
           }}
         >
-          {product.price.current}₫
+          {product.price.current||0}₫
         </Typography>
       </Box>
     </CardContent>

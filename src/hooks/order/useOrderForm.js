@@ -157,7 +157,7 @@ export const useOrderForm = () => {
 
         } catch (error) {
             console.error('Order creation failed:', error)
-            toast.error('Đặt hàng thất bại. Vui lòng thử lại.')
+           
         }
     }
 

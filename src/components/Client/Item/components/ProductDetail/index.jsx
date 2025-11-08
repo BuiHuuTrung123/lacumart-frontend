@@ -89,29 +89,36 @@ function ProductDetail() {
   ]
 
   return (
-    <Box sx={{ backgroundColor: '#f8fafc', minHeight: '100vh' }}>
+    <Box sx={{
+      backgroundColor: '#f8fafc', minHeight: '100vh', display: 'flex',
+      flexDirection: 'column'
+    }}>
       <Hearder />
 
       {/* Main Content */}
-      <Container maxWidth="xl" sx={{ py: 4 }}>
+      <Container maxWidth="xl" sx={{
+        py: { xs: 8, sm: 12, md: 20 },   // padding top/bottom responsive
+        position: 'relative',
+        flexGrow: 1                     // để Container chiếm khoảng trống chính giữa Header và Footer
+      }}>
         <BreadcrumbSection product={product} />
-        
+
         <Grid container spacing={4}>
-          <ProductImagesSection 
+          <ProductImagesSection
             product={product}
             productImages={productImages}
             selectedImage={selectedImage}
             onSelectImage={setSelectedImage}
           />
 
-          <ProductInfoSection 
+          <ProductInfoSection
             product={product}
             onAddToCart={handleAddToCart}
             onBuyNow={handleBuyNow}
           />
         </Grid>
 
-        <ProductDescriptionTabs 
+        <ProductDescriptionTabs
           product={product}
           tabValue={tabValue}
           onTabChange={handleTabChange}

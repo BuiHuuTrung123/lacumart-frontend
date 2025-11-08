@@ -45,10 +45,17 @@ const UserProfile = () => {
   } = useUserProfileForm()
 
   return (
-    <Box sx={{ minHeight: '100vh', bgcolor: '#f8fafc' }}>
+    <Box sx={{
+      minHeight: '100vh', bgcolor: '#f8fafc', display: 'flex',
+      flexDirection: 'column'
+    }}>
       <Hearder />
 
-      <Container maxWidth="lg" sx={{ py: 4 }}>
+      <Container maxWidth="lg" sx={{
+        py: { xs: 8, sm: 12, md: 20 },   // padding top/bottom responsive
+        position: 'relative',
+        flexGrow: 1                     // để Container chiếm khoảng trống chính giữa Header và Footer
+      }}>
         {/* Header */}
         <Box sx={{ mb: 4 }}>
           <Typography
