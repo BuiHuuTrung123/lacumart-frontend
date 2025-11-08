@@ -24,7 +24,7 @@ import {
   PASSWORD_RULE,
   PASSWORD_RULE_MESSAGE,
   PASSWORD_CONFIRMATION_MESSAGE
-} from '~/utils/validators'
+} from '~/utils/validators/productValidator'
 import { createNewBoardAPI } from '~/apis'
 
 function RegisterForm() {

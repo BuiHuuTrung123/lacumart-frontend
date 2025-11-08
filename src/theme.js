@@ -53,15 +53,15 @@ const theme = extendTheme({
           overscrollBehavior: 'none',
           boxSizing: 'border-box',
           "*::-webkit-scrollbar": {
-            width: { xs: "4px", sm: "6px", md: "8px" },
-            height: { xs: "4px", sm: "6px", md: "8px" },
+            width: { xs: "1px", sm: "1px", md: "1px" },
+            height: { xs: "1px", sm: "1px", md: "1px" },
           },
           "*::-webkit-scrollbar-thumb": {
             backgroundColor: '#dcdde1',
             borderRadius: "8px",
           },
           "*::-webkit-scrollbar-thumb:hover": {
-            backgroundColor: "#bfbfbf",
+            backgroundColor: "#cc3139ff",
           },
         },
         html: {

@@ -1,6 +1,6 @@
 // components/Client/Category/CategorySkeleton.jsx
-import React from 'react';
-import { Grid, Box, Skeleton, Container } from '@mui/material';
+import React from 'react'
+import { Grid, Box, Skeleton, Container } from '@mui/material'
 
 const CategorySkeleton = () => {
   return (
@@ -45,7 +45,7 @@ const CategorySkeleton = () => {
         </Box>
       </Box>
     </Container>
-  );
-};
+  )
+}
 
-export default CategorySkeleton;
+export default CategorySkeleton

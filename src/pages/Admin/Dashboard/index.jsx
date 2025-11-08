@@ -1,9 +1,9 @@
 // src/pages/AdminDashboard/AdminDashboard.jsx
 import React, { useState } from 'react';
 import { Box, Grid, Paper, Typography, Container } from '@mui/material';
-import DashboardSidebar from '~/components/Admin/DashboardSidebar/DashboardSidebar';
-import ProductManagement from '~/components/Admin/ProductManagement/ProductManagement';
-import CategoryManagement from '~/components/Admin/CategoryManagement/CategoryManagement';
+import DashboardSidebar from '~/components/Admin/DashboardSidebar';
+import ProductManagement from '~/components/Admin/ProductManagement';
+import CategoryManagement from '~/components/Admin/CategoryManagement';
 const AdminDashboard = () => {
   const [activeSection, setActiveSection] = useState('products');
 

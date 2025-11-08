@@ -24,9 +24,9 @@ const SupplementNavBar = () => {
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (
-        supplementRef.current && 
+        supplementRef.current &&
         !supplementRef.current.contains(event.target) &&
-        megaMenuRef.current && 
+        megaMenuRef.current &&
         !megaMenuRef.current.contains(event.target)
       ) {
         setShowMegaMenu(false);
@@ -44,6 +44,7 @@ const SupplementNavBar = () => {
       ref={supplementRef}
       sx={{
         backgroundColor: 'secondary.main',
+        top: (theme) => theme.trelloCustom.headerHeight,
         position: 'sticky', // THÊM DÒNG NÀY
         color: 'white',
         height: (theme) => theme.trelloCustom.supplementNavbarHeight,
@@ -61,7 +62,7 @@ const SupplementNavBar = () => {
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            height: '100%', 
+            height: '100%',
             gap: 4
           }}
         >
@@ -69,7 +70,7 @@ const SupplementNavBar = () => {
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 4, height: '100%' }}>
             {/* Thực Phẩm Bổ Sung với MegaMenu */}
             <Box
-              sx={{ 
+              sx={{
                 height: '100%',
                 position: 'relative'
               }}
@@ -88,7 +89,7 @@ const SupplementNavBar = () => {
                   borderColor: 'primary.main',
                   color: showMegaMenu ? 'primary.main]' : 'white',
                   px: 1,
-                  '&:hover': { 
+                  '&:hover': {
                     color: 'primary.main'
                   },
                   transition: 'all 0.2s ease'
@@ -115,14 +116,14 @@ const SupplementNavBar = () => {
                     overflowY: 'auto'
                   }}
                 >
-                  <MegaMenu 
-                    showMenu={showMegaMenu} 
+                  <MegaMenu
+                    showMenu={showMegaMenu}
                     onClose={handleCloseMegaMenu}
                   />
                 </Box>
               )}
             </Box>
-            
+
             {/* Các mục khác - chỉ đóng MegaMenu khi click (không đóng khi hover) */}
             <Typography
               onClick={handleOtherItemClick}
@@ -134,7 +135,7 @@ const SupplementNavBar = () => {
                 display: 'flex',
                 alignItems: 'center',
                 px: 1,
-                '&:hover': { 
+                '&:hover': {
                   color: 'primary.main',
                   borderBottom: '2px solid',
                   borderColor: 'primary.main'
@@ -144,7 +145,7 @@ const SupplementNavBar = () => {
             >
               Mục Tiêu & Nhu Cầu ▼
             </Typography>
-            
+
             <Typography
               onClick={handleOtherItemClick}
               sx={{
@@ -155,7 +156,7 @@ const SupplementNavBar = () => {
                 display: 'flex',
                 alignItems: 'center',
                 px: 1,
-                '&:hover': { 
+                '&:hover': {
                   color: 'primary.main',
                   borderBottom: '2px solid',
                   borderColor: 'primary.main'
@@ -165,7 +166,7 @@ const SupplementNavBar = () => {
             >
               Khuyến Mãi ▼
             </Typography>
-            
+
             <Typography
               onClick={handleOtherItemClick}
               sx={{
@@ -176,7 +177,7 @@ const SupplementNavBar = () => {
                 display: 'flex',
                 alignItems: 'center',
                 px: 1,
-                '&:hover': { 
+                '&:hover': {
                   color: 'primary.main',
                   borderBottom: '2px solid',
                   borderColor: 'primary.main'
@@ -186,7 +187,7 @@ const SupplementNavBar = () => {
             >
               Thương Hiệu
             </Typography>
-            
+
             <Typography
               onClick={handleOtherItemClick}
               sx={{
@@ -197,7 +198,7 @@ const SupplementNavBar = () => {
                 display: 'flex',
                 alignItems: 'center',
                 px: 1,
-                '&:hover': { 
+                '&:hover': {
                   color: 'primary.main',
                   borderBottom: '2px solid',
                   borderColor: 'primary.main'
@@ -207,7 +208,7 @@ const SupplementNavBar = () => {
             >
               Kiến Thức ▼
             </Typography>
-            
+
             <Typography
               onClick={handleOtherItemClick}
               sx={{
@@ -218,7 +219,7 @@ const SupplementNavBar = () => {
                 display: 'flex',
                 alignItems: 'center',
                 px: 1,
-                '&:hover': { 
+                '&:hover': {
                   color: 'primary.main',
                   borderBottom: '2px solid',
                   borderColor: 'primary.main'
@@ -228,7 +229,7 @@ const SupplementNavBar = () => {
             >
               Công Cụ ▼
             </Typography>
-            
+
             <Typography
               onClick={handleOtherItemClick}
               sx={{
@@ -239,7 +240,7 @@ const SupplementNavBar = () => {
                 display: 'flex',
                 alignItems: 'center',
                 px: 1,
-                '&:hover': { 
+                '&:hover': {
                   color: 'primary.main',
                   borderBottom: '2px solid',
                   borderColor: 'primary.main'
