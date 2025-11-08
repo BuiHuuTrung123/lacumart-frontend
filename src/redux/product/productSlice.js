@@ -30,7 +30,6 @@ export const createNewProductdAPI = createAsyncThunk(
                 }
             }
         )
-        toast.success('Thêm mới thành công')
         return response.data
     }
 )
@@ -48,7 +47,7 @@ export const updateProductAPI = createAsyncThunk(
                 }
             }
         )
-        toast.success('Cập nhật sản phẩm thành công')
+
         return response.data
     }
 )
@@ -77,6 +76,7 @@ export const productSlice = createSlice({
             state.currentProduct = product
         },
     },
+
     extraReducers: (builder) => {
 
         //Get All Product
@@ -104,6 +104,7 @@ export const productSlice = createSlice({
                 state.loading = false
                 state.products.push(action.payload)
                 state.error = null
+                toast.success('Thêm sản phẩm mới thành công! 🎉')
             })
             .addCase(createNewProductdAPI.rejected, (state, action) => {
                 state.loading = false
@@ -120,7 +121,7 @@ export const productSlice = createSlice({
                 state.products = state.products.filter(product =>
                     product._id !== action.payload._id
                 )
-
+                toast.success('xóa sản phẩm thành công!')
                 state.error = null
             })
             .addCase(deleteProductApi.rejected, (state, action) => {
@@ -140,6 +141,7 @@ export const productSlice = createSlice({
                 if (index !== -1) {
                     state.products[index] = updatedProduct
                 }
+                toast.success('Cập nhật sản phẩm thành công!')
             })
             .addCase(updateProductAPI.rejected, (state, action) => {
                 state.loading = false

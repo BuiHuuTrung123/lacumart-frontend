@@ -1,14 +1,14 @@
 // pages/Home.jsx (Đã cập nhật)
 import React, { Suspense, lazy } from 'react';
-import Hearder from '~/components/Client/Hearder/Hearder';
+import Hearder from '~/components/Client/Header';
 import Box from '@mui/material/Box';
 import Footer from '~/components/Client/Footer/Footer';
 import SupplementNavBar from '~/components/Client/SupplementNavBar/SupplementNavBar';
 
 // Lazy load các components
 const Banner = lazy(() => import('~/components/Client/Banner/Banner'));
-const Category = lazy(() => import('~/components/Client/Category/Category'));
-const CategorySection = lazy(() => import('~/components/Client/Item/CategorySection'));
+const Category = lazy(() => import('~/components/Client/Category'));
+const CategorySection = lazy(() => import('~/components/Client/Item'));
 
 // Import skeleton components
 import BannerSkeleton from '~/components/Client/Banner/BannerSkeleton';
@@ -45,12 +45,11 @@ function Home() {
     <Box
       sx={{
         minHeight: '100vh',
-        // maxWidth: '100vw',
         display: 'flex',
         flexDirection: 'column',
         backgroundColor: 'background.default',
         overflowX: 'hidden',
-        
+       overflowY: 'auto',
       }}
     >
       {/* Header & Navigation - Load ngay */}

@@ -28,13 +28,15 @@ function Banner() {
   return (
     <Box sx={{
       width: '100%',
+
       backgroundColor: 'background.default',
-      py: { md: 0 },
-      
+      py: { md:10 , sm: 2, xs: 0},
+     
     }}>
       <Box sx={{
         width: '100%',
         mb: { xs: 3, sm: 2 },
+  
       }}>
         <Swiper
           modules={[Autoplay]}

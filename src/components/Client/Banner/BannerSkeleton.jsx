@@ -17,7 +17,8 @@ const BannerSkeleton = () => {
               md: '550px',
               lg: '650px'
             },
-            borderRadius: { xs: '0px', sm: '16px', md: '20px' }
+            borderRadius: { xs: '0px', sm: '16px', md: '20px' },
+         
           }}
         />
       </Box>

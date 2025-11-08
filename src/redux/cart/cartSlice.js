@@ -75,7 +75,7 @@ export const cartSlice = createSlice({
       })
       .addCase(addItemToCartApi.fulfilled, (state, action) => {
         state.loading = false
-        console.log('action', action.payload)
+ 
         state.currentCart = action.payload
 
         toast.success('Đã thêm vào giỏ hàng!')
@@ -94,7 +94,7 @@ export const cartSlice = createSlice({
         state.loading = false
         // console.log('action', action.payload)
         state.currentCart = action.payload
-        toast.success('Cập nhật số lượng thành công')
+     
       })
       .addCase(updateQualityItemToCartApi.rejected, (state, action) => {
         state.loading = false
@@ -111,7 +111,7 @@ export const cartSlice = createSlice({
         state.loading = false
      
         state.currentCart = action.payload
-        toast.success('Xóa sản phẩm thành công')
+   
       })
       .addCase(deleItemToCartApi.rejected, (state, action) => {
         state.loading = false

@@ -26,7 +26,7 @@ import {
   EMAIL_RULE_MESSAGE,
   PASSWORD_RULE,
   PASSWORD_RULE_MESSAGE
-} from '~/utils/validators'
+} from '~/utils/validators/productValidator'
 
 function LoginForm() {
   const dispatch = useDispatch()

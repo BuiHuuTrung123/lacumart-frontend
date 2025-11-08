@@ -257,7 +257,7 @@ const MegaMenu = ({ showMenu, onClose }) => {
                           color: '#ff5722' 
                         }}
                       >
-                        {product.price}
+                        {product.price.current}
                       </Typography>
                     </Box>
                   </Grid>
