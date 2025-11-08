@@ -76,7 +76,7 @@ const CartItemsSection = ({
                                                 style={{
                                                     width: '100%',
                                                     height: '100%',
-                                                    objectFit: 'cover',
+                                                    objectFit: 'scale-down',
                                                 }}
                                             />
                                         </Box>
@@ -284,13 +284,13 @@ const CartItemsSection = ({
             )}
 
             {/* Coupon Section */}
-            {currentCart?.items?.length > 0 && (
+            {/* {currentCart?.items?.length > 0 && (
                 <Box sx={{ mt: 4, pt: 3, borderTop: '1px solid #e0e0e0' }}>
                     <Typography variant="body2" color="#666">
                         Các coupon đã lưu:
                     </Typography>
                 </Box>
-            )}
+            )} */}
         </Grid>
     )
 }

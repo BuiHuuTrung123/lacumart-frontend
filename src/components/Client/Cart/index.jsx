@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Box, Container, Grid } from '@mui/material'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'  
+import { useNavigate } from 'react-router-dom'
 import Hearder from '~/components/Client/Header'
 import Footer from '~/components/Client/Footer/Footer'
 import { selectCurrentUser } from '~/redux/user/userSlice/'
@@ -54,14 +54,22 @@ function Cart() {
     const finalTotal = totalAmount + shippingFee
 
     return (
-        <Box sx={{ minHeight: '100vh', bgcolor: '#f8fafc' }}>
+        <Box sx={{
+            minHeight: '100vh', bgcolor: '#f8fafc', display: 'flex',
+            flexDirection: 'column'
+        }}>
             <Hearder />
 
-            <Container maxWidth="xl" sx={{ py: 20, position: 'relative' }}>
+            <Container maxWidth="xl"
+                sx={{
+                    py: { xs: 8, sm: 12, md: 20 },   // padding top/bottom responsive
+                    position: 'relative',
+                    flexGrow: 1                     // để Container chiếm khoảng trống chính giữa Header và Footer
+                }}>
                 {/* <ProgressStepper activeStep={activeStep} steps={steps} /> */}
 
                 <Grid container spacing={4}>
-                    <CartItemsSection 
+                    <CartItemsSection
                         currentCart={currentCart}
                         onIncreaseQuantity={handleUpdateIncreaseQualityItemToCartApi}
                         onReduceQuantity={handleUpdateReduceQualityItemToCartApi}
@@ -69,7 +77,7 @@ function Cart() {
                         onContinueShopping={handleContinueShopping}
                     />
 
-                    <OrderSummary 
+                    <OrderSummary
                         currentCart={currentCart}
                         totalAmount={totalAmount}
                         shippingFee={shippingFee}

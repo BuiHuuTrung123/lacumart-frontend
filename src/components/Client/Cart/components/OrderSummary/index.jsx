@@ -32,7 +32,7 @@ const OrderSummary = ({ currentCart, totalAmount, shippingFee, finalTotal, onChe
                     background: 'white',
                     border: '1px solid #e0e0e0',
                     boxShadow: '0 4px 20px rgba(0,0,0,0.08)',
-                    position: 'absolute',
+                    position: 'sticky',
                     top: 234
                 }}
             >   

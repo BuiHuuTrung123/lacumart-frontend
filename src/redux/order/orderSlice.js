@@ -75,7 +75,7 @@ export const orderSlice = createSlice({
                 state.currentOrder = action.payload
                 state.orders.unshift(action.payload)
                 state.error = null
-                toast.success('Đặt hàng thành công! 🎉')
+                toast.success('Đặt hàng thành công!')
             })
             .addCase(createNewOrderAPI.rejected, (state, action) => {
                 state.loading = false

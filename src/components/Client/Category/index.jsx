@@ -33,10 +33,7 @@ const Category = () => {
 
   return (
     <Container
-      maxWidth="xl"
-      sx={{
-        px: { xs: 2, sm: 3, md: 4 }
-      }}
+      maxWidth="xl" sx={{ px: { xs: 2, sm: 3, md: 4 }, py: { xs: 4, md: 10 } }}
     >
       <Box
         sx={{
@@ -74,8 +71,9 @@ const Category = () => {
           <Grid
             container
             spacing={{ xs: 1.5, sm: 2, md: 3 }}
-            justifyContent="center"
+            justifyContent={isMobile ? 'flex-start' : 'center'}
             sx={{
+              width: 'max-content',
               flexWrap: 'nowrap',
               overflowX: 'auto',
               pb: 2,
@@ -166,7 +164,7 @@ const Category = () => {
                     }}
                   />
                 </Box>
-                
+
                 {/* Category Name - Clickable */}
                 <Typography
                   variant="subtitle1"

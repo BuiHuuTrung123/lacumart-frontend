@@ -36,6 +36,7 @@ const Checkout = () => {
         handleSubmit,
         watch,
         setValue,
+        control,
         errors,
         activeStep,
         loading,
@@ -88,6 +89,7 @@ const Checkout = () => {
                         register={register} 
                         errors={errors} 
                         watch={watch} 
+                        control={control}
                         setValue={setValue}
                         selectedCity={selectedCity}
                         selectedDistrict={selectedDistrict}

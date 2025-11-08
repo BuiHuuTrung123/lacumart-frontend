@@ -8,9 +8,10 @@ import {
 } from '@mui/material'
 import AddressSelect from '~/components/Client/Checkout/components/AddressSelect'
 
-const ShippingStep = ({ register, errors, watch, setValue }) => {
+const ShippingStep = ({ register, errors, watch, setValue, control }) => {
     const selectedCity = watch('city')
     const selectedDistrict = watch('district')
+    const selectedWard = watch('ward')
 
     return (
         <Box>
@@ -37,7 +38,7 @@ const ShippingStep = ({ register, errors, watch, setValue }) => {
                     <TextField
                         fullWidth
                         label="Số điện thoại"
-                        {...register('phone', { 
+                        {...register('phone', {
                             required: 'Số điện thoại là bắt buộc',
                             pattern: {
                                 value: /^(0[3|5|7|8|9])+([0-9]{8})$/,
@@ -49,15 +50,17 @@ const ShippingStep = ({ register, errors, watch, setValue }) => {
                         variant="outlined"
                     />
                 </Grid>
-                
+
                 {/* Address Select Component */}
-                <AddressSelect 
+                <AddressSelect
                     register={register}
                     errors={errors}
                     selectedCity={selectedCity}
                     selectedDistrict={selectedDistrict}
+                    selectedWard={selectedWard}
+                    control={control}
                     setValue={setValue}
-                    
+
                 />
 
                 <Grid item xs={12}>
