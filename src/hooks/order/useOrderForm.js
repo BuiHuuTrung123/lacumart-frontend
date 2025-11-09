@@ -153,7 +153,7 @@ export const useOrderForm = () => {
                 })
             }
 
-            toast.success('Đặt hàng thành công!')
+          
 
         } catch (error) {
             console.error('Order creation failed:', error)
