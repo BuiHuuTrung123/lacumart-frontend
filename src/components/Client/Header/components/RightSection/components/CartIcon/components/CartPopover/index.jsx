@@ -22,12 +22,12 @@ const CartPopover = ({ showMenu, onClose }) => {
     }, [dispatch, currentUser])
 
     const handleViewCartDetail = () => {
-        navigate(`/cartDetail/${currentUser._id}`)
+        navigate(`/cartDetail`)
         onClose()
     }
  
     const handleCheckout = () => {
-        navigate(`/checkout/${currentUser._id}`)
+        navigate(`/checkout`)
     }
 
     const handleUpdateIncreaseQualityItemToCartApi = (productId) => {

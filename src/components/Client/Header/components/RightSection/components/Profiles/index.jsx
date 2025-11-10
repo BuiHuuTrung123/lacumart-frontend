@@ -57,7 +57,7 @@ function Profiles() {
       });
   }
   const handleProfiles = () => {
-    navigate(`/userProfile/${currentUser._id}`)
+    navigate(`/userProfile`)
 
   }
   return (

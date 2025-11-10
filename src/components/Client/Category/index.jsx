@@ -28,7 +28,7 @@ const Category = () => {
   const navigate = useNavigate()
 
   const handleCategoryClick = (categoryName) => {
-    navigate(`/category/${encodeURIComponent(categoryName.toLowerCase())}`)
+    navigate(`/category?name=${encodeURIComponent(categoryName)}`)
   }
 
   return (

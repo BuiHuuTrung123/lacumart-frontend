@@ -35,15 +35,15 @@ function App() {
       <Route path='/Home' element={<Home />} />
       <Route path='/login' element={<Auth />} />
       <Route path='/register' element={<Auth />} />
-      <Route path='/account/verification' element={<AccoutVerification />} />
-      <Route path='/productDetail/:productName' element={<ProductDetail />} />
-      <Route path='/cartDetail/:id' element={<Cart />} />
-      <Route path='/checkout/:id' element={<Checkout />} />
-      <Route path='/order/confirmation/:id' element={<ConfirmationCheckout />} />
-        <Route path='/order' element={<OrderFollow />} />
-        <Route path='/userProfile/:id' element={<UserProfile />} />
+      <Route path='/account-verification' element={<AccoutVerification />} />
+      <Route path='/:productName' element={<ProductDetail />} />
+      <Route path='/cartDetail' element={<Cart />} />
+      <Route path='/checkout' element={<Checkout />} />
+      <Route path='/order-confirmation' element={<ConfirmationCheckout />} />
+        <Route path='/order-follow' element={<OrderFollow />} />
+        <Route path='/userProfile' element={<UserProfile />} />
       // Trong App.js hoặc router
-      <Route path='/category/:categoryName' element={<ProductByCategory />} />
+      <Route path='/category' element={<ProductByCategory />} />
       {/* 404 route*/}
       <Route path='*' element={<NotFound />} />
       {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}

@@ -13,13 +13,13 @@ export default defineConfig({
   optimizeDeps: {
     include: ['@mui/material/Tooltip', '@emotion/styled', '@mui/material/Unstable_Grid2'],
   },
-  base: '/',
-  server: {
-    // Fix MIME type
-    headers: {
-      'Content-Type': 'application/javascript'
-    },
+  base: './',
+  // server: {
+  //   // Fix MIME type
+  //   headers: {
+  //     'Content-Type': 'application/javascript'
+  //   },
     // SPA fallback
    
-  }
+  // }
 })

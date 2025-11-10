@@ -6,8 +6,8 @@ import { useNavigate } from 'react-router-dom'
 const LocalShipping = () => {
    const navigate = useNavigate()
     const handleViewOrder = () => {
-      navigate('/order')
-      console.log('aa')
+      navigate('/order-follow')
+    
     }
   return (
     <Tooltip title="Đơn hàng">

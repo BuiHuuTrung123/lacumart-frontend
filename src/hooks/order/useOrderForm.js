@@ -137,7 +137,7 @@ export const useOrderForm = () => {
 
             // Chuyển hướng dựa trên phương thức thanh toán
             if (data.paymentMethod === 'banking') {
-                navigate(`/order/confirmation/${result._id}`, { 
+                navigate(`/order-confirmation`, { 
                     state: { 
                         showBankInfo: true,
                         orderCode: result.orderCode,
@@ -145,7 +145,7 @@ export const useOrderForm = () => {
                     }
                 })
             } else {
-                navigate(`/order/confirmation/${result._id}`, {
+                navigate(`/order-confirmation`, {
                     state: {
                         orderCode: result.orderCode,
                         totalAmount: total
