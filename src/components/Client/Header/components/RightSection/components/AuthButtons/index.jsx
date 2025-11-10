@@ -8,7 +8,7 @@ const AuthButtons = () => {
       <Link to="/login" style={{ textDecoration: 'none' }}>
         <Button
           sx={{
-            width: { xs: 'auto', sm: '100px' },
+            width: { xs: 'auto', sm: '120px' },
             height: { xs: '36px', sm: '40px' },
             background: 'rgba(255, 255, 255, 0.15)',
             color: 'white',
@@ -32,7 +32,7 @@ const AuthButtons = () => {
       <Link to="/register" style={{ textDecoration: 'none' }}>
         <Button
           sx={{
-            width: { xs: 'auto', sm: '100px' },
+            width: { xs: 'auto', sm: '120px' },
             height: { xs: '36px', sm: '40px' },
             background: 'white',
             color: '#ff5722',

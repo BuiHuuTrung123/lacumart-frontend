@@ -45,8 +45,9 @@ const RightSection = ({
           setShowNotifications={setShowNotifications}
         />
       )}
-
-      <LocalShipping  />
+      {currentUser && (
+        <LocalShipping />
+      )}  
 
       {currentUser && (
         <CartIcon
