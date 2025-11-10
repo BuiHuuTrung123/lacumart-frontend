@@ -21,7 +21,7 @@ const ProductCard = ({ product }) => {
     if (!e.target.closest('.product-actions')) {
       const productId = product.id
 
-      navigate(`/productDetail/${product.slug}`)
+      navigate(`/${product.slug}`)
     }
   }
 
@@ -54,7 +54,7 @@ const ProductCard = ({ product }) => {
     }
 
     dispatch(addItemToCartApi(cartData))
-    navigate(`/cartDetail/${currentUser._id}`)
+    navigate(`/cartDetail`)
   }
 
   const handleFavoriteClick = (e) => {

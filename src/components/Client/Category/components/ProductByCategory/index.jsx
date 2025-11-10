@@ -14,9 +14,12 @@ import FiltersAndSort from './components/FiltersAndSort'
 import ProductsGrid from './components/ProductsGrid'
 import NoProducts from './components/NoProducts'
 import Typography from '@mui/material/Typography'
-
+import { useSearchParams } from 'react-router-dom'
 const ProductsByCategory = () => {
-    const { categoryName } = useParams()
+     const [searchParams] = useSearchParams()
+    const categoryName = searchParams.get('name')
+    // const { categoryName } = useParams()
+console.log(categoryName)
     const navigate = useNavigate()
     const dispatch = useDispatch()
     const currentUser = useSelector(selectCurrentUser)

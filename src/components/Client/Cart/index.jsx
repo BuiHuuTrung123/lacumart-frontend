@@ -44,7 +44,7 @@ function Cart() {
     }
 
     const handleCheckout = () => {
-        navigate(`/checkout/${currentUser._id}`)
+        navigate(`/checkout`)
     }
 
     const steps = ['Giỏ hàng', 'Vận chuyển', 'Thanh toán', 'Xác nhận']
