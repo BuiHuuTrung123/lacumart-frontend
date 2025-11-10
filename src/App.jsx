@@ -43,7 +43,7 @@ function App() {
         <Route path='/order/follow' element={<OrderFollow />} />
         <Route path='/userProfile/:id' element={<UserProfile />} />
       // Trong App.js hoặc router
-      <Route path="/category/:categoryName" element={<ProductByCategory />} />
+      <Route path='/category/:categoryName' element={<ProductByCategory />} />
       {/* 404 route*/}
       <Route path='*' element={<NotFound />} />
       {/* <Route path="*" element={<Navigate to="/login" replace />} /> */}

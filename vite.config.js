@@ -4,14 +4,22 @@ import svgr from 'vite-plugin-svgr'
 
 // https://vitejs.dev/config/
 export default defineConfig({
-  plugins: [react(),svgr()],
-   resolve: {
+  plugins: [react(), svgr()],
+  resolve: {
     alias: [
       { find: '~', replacement: '/src' }
     ]
   },
-    optimizeDeps: {
+  optimizeDeps: {
     include: ['@mui/material/Tooltip', '@emotion/styled', '@mui/material/Unstable_Grid2'],
   },
-   base: './'
+  base: './',
+  server: {
+    // Fix MIME type
+    headers: {
+      'Content-Type': 'application/javascript'
+    },
+    // SPA fallback
+   
+  }
 })
