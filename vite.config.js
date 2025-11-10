@@ -13,7 +13,7 @@ export default defineConfig({
   optimizeDeps: {
     include: ['@mui/material/Tooltip', '@emotion/styled', '@mui/material/Unstable_Grid2'],
   },
-  base: './',
+  base: '/',
   server: {
     // Fix MIME type
     headers: {

@@ -1,19 +1,19 @@
 // pages/Home.jsx (Đã cập nhật)
-import React, { Suspense, lazy } from 'react';
-import Hearder from '~/components/Client/Header';
-import Box from '@mui/material/Box';
-import Footer from '~/components/Client/Footer/Footer';
-import SupplementNavBar from '~/components/Client/SupplementNavBar/SupplementNavBar';
+import React, { Suspense, lazy } from 'react'
+import Hearder from '~/components/Client/Header'
+import Box from '@mui/material/Box'
+import Footer from '~/components/Client/Footer/Footer'
+import SupplementNavBar from '~/components/Client/SupplementNavBar/SupplementNavBar'
 
 // Lazy load các components
-const Banner = lazy(() => import('~/components/Client/Banner/Banner'));
-const Category = lazy(() => import('~/components/Client/Category'));
-const CategorySection = lazy(() => import('~/components/Client/Item'));
+const Banner = lazy(() => import('~/components/Client/Banner/Banner'))
+const Category = lazy(() => import('~/components/Client/Category'))
+const CategorySection = lazy(() => import('~/components/Client/Item'))
 
 // Import skeleton components
-import BannerSkeleton from '~/components/Client/Banner/BannerSkeleton';
-import CategorySkeleton from '~/components/Client/Category/CategorySkeleton';
-import { Container, Skeleton } from '@mui/material';
+import BannerSkeleton from '~/components/Client/Banner/BannerSkeleton'
+import CategorySkeleton from '~/components/Client/Category/CategorySkeleton'
+import { Container, Skeleton } from '@mui/material'
 
 // Skeleton cho CategorySection
 const CategorySectionSkeleton = () => (
@@ -38,7 +38,7 @@ const CategorySectionSkeleton = () => (
       </Box>
     ))}
   </Container>
-);
+)
 
 function Home() {
   return (
@@ -74,7 +74,7 @@ function Home() {
       {/* Footer - Load ngay */}
       <Footer />
     </Box>
-  );
+  )
 }
 
-export default Home;
+export default Home

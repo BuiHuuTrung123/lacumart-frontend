@@ -40,7 +40,7 @@ function App() {
       <Route path='/cartDetail/:id' element={<Cart />} />
       <Route path='/checkout/:id' element={<Checkout />} />
       <Route path='/order/confirmation/:id' element={<ConfirmationCheckout />} />
-        <Route path='/order/follow' element={<OrderFollow />} />
+        <Route path='/order' element={<OrderFollow />} />
         <Route path='/userProfile/:id' element={<UserProfile />} />
       // Trong App.js hoặc router
       <Route path='/category/:categoryName' element={<ProductByCategory />} />
