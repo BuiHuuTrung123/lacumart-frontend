@@ -1,6 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
 import Box from '@mui/material/Box'
-import { Fade } from '@mui/material'
 import { useSelector } from 'react-redux'
 import { selectCurrentUser } from '~/redux/user/userSlice'
 import { selectCurrentCart } from '~/redux/cart/cartSlice'

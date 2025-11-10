@@ -6,7 +6,7 @@ import { useNavigate } from 'react-router-dom'
 const LocalShipping = () => {
    const navigate = useNavigate()
     const handleViewOrder = () => {
-      navigate('/order/follow')
+      navigate('/order')
       console.log('aa')
     }
   return (
